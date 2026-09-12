@@ -3,90 +3,84 @@ import { useUI } from '../context/UIContext'
 
 function HomeFooter() {
   const { showToast } = useUI()
+
   return (
-    <footer className="bg-navyDark text-slate-300" id="footer">
-      <div className="border-b border-white/10">
-        <div className="max-w-[1200px] mx-auto px-6 py-12 grid gap-10 lg:grid-cols-[1.2fr_2fr_1fr]">
+    <footer className="bg-[#0a1d2d] text-slate-200" id="footer">
+      <div className="max-w-[1400px] mx-auto px-6 py-12 lg:px-10">
+        <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr_1fr_1.2fr] xl:gap-16">
           <div>
-            <a className="flex items-center gap-3" href="/" aria-label="JNTUH Education Foundation Home">
-              <div className="w-11 h-11 shrink-0">
-                <svg viewBox="0 0 100 100" className="w-11 h-11" aria-hidden="true">
-                  <circle cx="50" cy="50" r="46" fill="#005B5C" stroke="#D4AF37" strokeWidth="4" />
-                  <circle cx="50" cy="50" r="38" fill="none" stroke="#FFFFFF" strokeWidth="1.5" strokeDasharray="3,3" />
-                  <path d="M30 46 C35 42, 45 42, 50 47 C55 42, 65 42, 70 46 L70 68 C65 64, 55 64, 50 69 C45 64, 35 64, 30 68 Z" fill="#FFFFFF" />
-                </svg>
-              </div>
-              <div className="leading-tight">
-                <span className="block font-heading font-bold text-white text-sm tracking-wide">JNTUH EDUCATION FOUNDATION</span>
-                <span className="block text-xs text-slate-400">An Initiative of JNTU Hyderabad</span>
-              </div>
-            </a>
-            <div className="flex gap-2.5 mt-5" id="social-links">
-              <a href="#" aria-label="Facebook" className="w-9 h-9 grid place-items-center rounded-full bg-white/10 hover:bg-teal hover:text-white text-xs font-bold">FB</a>
-              <a href="#" aria-label="X / Twitter" className="w-9 h-9 grid place-items-center rounded-full bg-white/10 hover:bg-teal hover:text-white text-xs font-bold">X</a>
-              <a href="#" aria-label="LinkedIn" className="w-9 h-9 grid place-items-center rounded-full bg-white/10 hover:bg-teal hover:text-white text-xs font-bold">in</a>
-              <a href="#" aria-label="YouTube" className="w-9 h-9 grid place-items-center rounded-full bg-white/10 hover:bg-teal hover:text-white text-xs font-bold">YT</a>
+            <div className="text-[2rem] font-black leading-none tracking-tight text-white md:text-[2.6rem]">
+              Degree<span className="text-[#f7b64a]">+</span>
+            </div>
+            <p className="mt-6 max-w-[18rem] text-xl leading-relaxed text-slate-200">
+              We provide 21st Century job skills.
+            </p>
+
+            <div className="mt-8 flex gap-4" id="social-links">
+              <a href="#" aria-label="Facebook" className="grid h-10 w-10 place-items-center rounded-full bg-white text-[#0a1d2d] text-base font-bold shadow-sm transition hover:opacity-90">f</a>
+              <a href="#" aria-label="LinkedIn" className="grid h-10 w-10 place-items-center rounded-full bg-white text-[#0a1d2d] text-base font-bold shadow-sm transition hover:opacity-90">in</a>
+              <a href="#" aria-label="Instagram" className="grid h-10 w-10 place-items-center rounded-full bg-white text-[#0a1d2d] text-base font-bold shadow-sm transition hover:opacity-90">◎</a>
             </div>
           </div>
 
-          <div className="grid gap-8 grid-cols-2 sm:grid-cols-3" id="footer-links">
-            <div>
-              <h4 className="font-heading font-bold text-white text-sm tracking-wide mb-3">Learn</h4>
-              <ul className="grid gap-2 text-sm">
-                <li><a className="hover:text-teal-light" href="#learning-areas">All Courses</a></li>
-                <li><a className="hover:text-teal-light" href="#learning-areas">Learning Paths</a></li>
-                <li><a className="hover:text-teal-light" href="#learning-areas">New Courses</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-heading font-bold text-white text-sm tracking-wide mb-3">Certifications</h4>
-              <ul className="grid gap-2 text-sm">
-                <li><a className="hover:text-teal-light" href="#certifications">Skillsoft Certs</a></li>
-                <li><a className="hover:text-teal-light" href="#certifications">Exam Info</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-heading font-bold text-white text-sm tracking-wide mb-3">Support</h4>
-              <ul className="grid gap-2 text-sm">
-                <li><a className="hover:text-teal-light" href="#footer">Help Center</a></li>
-                <li><a className="hover:text-teal-light" href="#footer">Contact Us</a></li>
-                <li><a className="hover:text-teal-light" href="#footer">FAQ</a></li>
-              </ul>
-            </div>
+          <div>
+            <h4 className="mb-6 text-[2rem] font-bold text-white">Useful links</h4>
+            <ul className="space-y-4 text-xl text-slate-300">
+              <li><a className="hover:text-[#7fe7db]" href="#">Home</a></li>
+              <li><a className="hover:text-[#7fe7db]" href="#about">About Us</a></li>
+              <li><a className="hover:text-[#7fe7db]" href="#learning-areas">Our Courses</a></li>
+              <li><a className="hover:text-[#7fe7db]" href="#footer">Contact Us</a></li>
+            </ul>
           </div>
 
-          <div id="footer-newsletter">
-            <h4 className="font-heading font-bold text-white text-sm tracking-wide mb-3">Stay Connected</h4>
-            <p className="text-sm text-slate-400 mb-3">Subscribe for updates and new courses.</p>
-            <form
-              noValidate
-              onSubmit={(e) => {
-                e.preventDefault()
-                showToast('Thank you for subscribing! Please check your inbox.')
-              }}
-            >
-              <div className="flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl p-1.5 pl-4">
-                <input type="email" required placeholder="Enter your email" aria-label="Enter your email for newsletter" className="flex-1 min-w-0 bg-transparent outline-none text-sm text-white placeholder:text-slate-500" />
-                <button type="submit" aria-label="Subscribe" className="w-10 h-10 shrink-0 grid place-items-center rounded-lg bg-teal text-white hover:bg-teal-dark">→</button>
+          <div>
+            <h4 className="mb-6 text-[2rem] font-bold text-white">More</h4>
+            <ul className="space-y-4 text-xl text-slate-300">
+              <li><a className="hover:text-[#7fe7db]" href="#">Terms &amp; Conditions</a></li>
+              <li><a className="hover:text-[#7fe7db]" href="#">Privacy Policy</a></li>
+              <li><a className="hover:text-[#7fe7db]" href="#">Help</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-6 text-[2rem] font-bold text-white">Contact Us</h4>
+            <div className="space-y-5 text-xl text-slate-200">
+              <div className="flex items-start gap-3">
+                <span className="mt-1 inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#f7b64a] text-sm font-bold text-[#0a1d2d]">●</span>
+                <p className="leading-relaxed">
+                  <span className="block font-bold text-white">SPPU EDUTECH FOUNDATION</span>
+                  <span className="block">Savitribai Phule Pune University</span>
+                  <span className="block">Campus,</span>
+                  <span className="block">Ganeshkhind, Pune, Maharashtra</span>
+                  <span className="block">411007</span>
+                </p>
               </div>
-            </form>
+
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#f7b64a] text-sm font-bold text-[#0a1d2d]">☎</span>
+                <a href="tel:+918956327294" className="hover:text-[#7fe7db]">+91 - 8956327294</a>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#f7b64a] text-sm font-bold text-[#0a1d2d]">✉</span>
+                <a href="mailto:info@degreeplus.in" className="hover:text-[#7fe7db]">info@degreeplus.in</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <div>
-        <div className="max-w-[1200px] mx-auto px-6 py-5 flex flex-col md:flex-row items-center gap-3 md:justify-between text-xs text-slate-400">
-          <p>© 2025 JNTUH Education Foundation. All Rights Reserved.</p>
-          <div className="flex items-center gap-3">
-            <a className="hover:text-teal-light" href="#">Privacy Policy</a>
-            <span>|</span>
-            <a className="hover:text-teal-light" href="#">Terms of Use</a>
-            <span>|</span>
-            <a className="hover:text-teal-light" href="#">Security</a>
-          </div>
-          <div className="inline-flex items-center gap-1.5 font-semibold text-teal-light">
-            <span>✓</span>
-            <span>Trusted &amp; Secure</span>
+      <div className="border-t border-white/10">
+        <div className="max-w-[1400px] mx-auto px-6 py-5 text-sm text-slate-300">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <p>© 2025 JNTUH Education Foundation. All Rights Reserved.</p>
+            <div className="flex flex-wrap items-center gap-3">
+              <a href="#" className="hover:text-[#7fe7db]">Privacy Policy</a>
+              <span>|</span>
+              <a href="#" className="hover:text-[#7fe7db]">Terms of Use</a>
+              <span>|</span>
+              <a href="#" className="hover:text-[#7fe7db]">Security</a>
+            </div>
           </div>
         </div>
       </div>
@@ -110,6 +104,7 @@ function SubFooter() {
             <li><a href="#featured">Featured courses</a></li>
             <li><a href="#catalog">Semester catalog</a></li>
             <li><a href="#pe3">PE-3 details</a></li>
+            <li><Link to="/skillsoft-catalog">Skillsoft Catalog</Link></li>
           </ul>
         </div>
       </div>
