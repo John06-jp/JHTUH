@@ -12,8 +12,32 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              navy: '#071735',
+              navyDark: '#040D1A',
+              navyLight: '#0B1E40',
+              teal: { DEFAULT: '#007D79', dark: '#00615E', light: '#36D1C4', bg: '#E6F4F3' },
+              gold: '#D4AF37',
+              ink: '#122032',
+              muted: '#536274',
+              line: '#DBE5ED',
+              soft: '#F3F8FB'
+            },
+            fontFamily: {
+              body: ['Inter','system-ui','sans-serif'],
+              heading: ['Outfit','Inter','sans-serif']
+            }
+          }
+        }
+      }
+    </script>
   </head>
-  <body>
+  <body class="font-body text-ink bg-white antialiased">
 
     <!-- Header Navigation -->
     <header class="site-header" id="header">
@@ -248,73 +272,91 @@
           </div>
 
           <div class="area-grid">
-            <a href="https://jef.jntuh.ac.in/skillsoft-cse/" class="area-card" data-category="Computer Science">
+            <a href="cse-courses.html" class="area-card" data-category="Computer Science">
               <div class="area-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M7 8l3 3-3 3M13 14h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
               </div>
-              <span class="area-title">Computer Science</span>
+              <span class="area-title">Computer Science Engineering</span>
+              <span class="area-desc">View CSE professional electives, semester filters and additional learning subjects.</span>
+              <span class="area-link">View CSE Courses →</span>
             </a>
 
-            <a href="https://jef.jntuh.ac.in/skillsoft-cseaiml/" class="area-card" data-category="Computer Science AI ML">
+            <a href="program.html?p=aiml" class="area-card" data-category="Computer Science AI ML">
               <div class="area-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
               </div>
               <span class="area-title">Computer Science (AI/ML)</span>
+              <span class="area-desc">View AI/ML electives: testing, mobile, cloud, scripting and cloud security.</span>
+              <span class="area-link">View Courses →</span>
             </a>
 
-            <a href="https://jef.jntuh.ac.in/skillsoft-cseds/" class="area-card" data-category="Computer Science Data Science">
+            <a href="program.html?p=ds" class="area-card" data-category="Computer Science Data Science">
               <div class="area-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
               </div>
               <span class="area-title">Computer Science (Data Science)</span>
+              <span class="area-desc">View Data Science electives: AI, DevOps, visualisation, NLP, cloud and blockchain.</span>
+              <span class="area-link">View Courses →</span>
             </a>
 
-            <a href="https://jef.jntuh.ac.in/skillsoft-csecs/" class="area-card" data-category="Computer Science CyberSecurity">
+            <a href="program.html?p=cs" class="area-card" data-category="Computer Science CyberSecurity">
               <div class="area-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
               </div>
               <span class="area-title">Computer Science (CyberSecurity)</span>
+              <span class="area-desc">View Cyber Security electives: ethical hacking, ML, blockchain and cloud security.</span>
+              <span class="area-link">View Courses →</span>
             </a>
 
-            <a href="https://jef.jntuh.ac.in/skillsoft-it/" class="area-card" data-category="Information Technology">
+            <a href="program.html?p=it" class="area-card" data-category="Information Technology">
               <div class="area-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
               </div>
               <span class="area-title">Information Technology</span>
+              <span class="area-desc">View IT electives: analytics, operating systems, full stack, AI and security.</span>
+              <span class="area-link">View Courses →</span>
             </a>
 
-            <a href="https://jef.jntuh.ac.in/skillsoft-ece/" class="area-card" data-category="Electronics Communication">
+            <a href="program.html?p=ece" class="area-card" data-category="Electronics Communication">
               <div class="area-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>
               </div>
               <span class="area-title">Electronics and Communication</span>
+              <span class="area-desc">View ECE electives: operating systems, networking, AI and machine learning.</span>
+              <span class="area-link">View Courses →</span>
             </a>
 
-            <a href="https://jef.jntuh.ac.in/skillsoft-eee/" class="area-card" data-category="Electronics Electrical">
+            <a href="program.html?p=eee" class="area-card" data-category="Electronics Electrical">
               <div class="area-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg>
               </div>
               <span class="area-title">Electronics and Electrical</span>
+              <span class="area-desc">View EEE additional learning: systems, networks, AI, data and business skills.</span>
+              <span class="area-link">View Courses →</span>
             </a>
 
-            <a href="https://jef.jntuh.ac.in/skillsoft-mech/" class="area-card" data-category="Mechanical Engineering">
+            <a href="program.html?p=mech" class="area-card" data-category="Mechanical Engineering">
               <div class="area-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="1.8" fill="none"/><rect x="9" y="9" width="6" height="6" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
               </div>
               <span class="area-title">Mechanical Engineering</span>
+              <span class="area-desc">View Mechanical additional learning: tools, data, AI and DevOps skills.</span>
+              <span class="area-link">View Courses →</span>
             </a>
 
-            <a href="https://jef.jntuh.ac.in/skillsoft-civil/" class="area-card" data-category="Civil Engineering">
+            <a href="program.html?p=civil" class="area-card" data-category="Civil Engineering">
               <div class="area-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-4 7 4v12M8 12h2M14 12h2M8 16h2M14 16h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
               </div>
               <span class="area-title">Civil Engineering</span>
+              <span class="area-desc">View Civil additional learning: storytelling, data, tools and business skills.</span>
+              <span class="area-link">View Courses →</span>
             </a>
           </div>
 
           <div class="learning-footer">
-            <a href="https://jef.jntuh.ac.in/skillsoftstreams/" class="link-with-arrow" target="_blank" rel="noopener">
-              View Official Stream Directory
+            <a href="index.html#learning-areas" class="link-with-arrow">
+              View All Programs On This Site
               <svg viewBox="0 0 24 24" class="link-arrow" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
             </a>
           </div>
