@@ -4,9 +4,10 @@
  */
 
 // ─── DOM References ────────────────────────────────────────────────
-const header        = document.querySelector('.site-header');
-const menuToggle    = document.querySelector('.menu-toggle');
-const siteNav       = document.querySelector('.site-nav');
+const header        = document.getElementById('header');
+const menuToggle    = document.getElementById('menu-toggle');
+const siteNav       = document.getElementById('site-nav');
+const mobileNav     = document.getElementById('mobile-nav');
 
 // Header Modals
 const openSearchBtn   = document.getElementById('open-search-btn');
@@ -115,8 +116,10 @@ function attachBackdropClose(dialog) {
 
 // ─── Header: Mobile Hamburger Menu ────────────────────────────────
 menuToggle?.addEventListener('click', () => {
-  const isOpen = siteNav.classList.toggle('is-open');
-  menuToggle.setAttribute('aria-expanded', String(isOpen));
+  const willOpen = mobileNav ? mobileNav.classList.contains('hidden') : !siteNav.classList.contains('is-open');
+  mobileNav?.classList.toggle('hidden', !willOpen);
+  siteNav.classList.toggle('is-open', willOpen);
+  menuToggle.setAttribute('aria-expanded', String(willOpen));
 
   // Animate hamburger → X
   const spans = menuToggle.querySelectorAll('span');
@@ -302,7 +305,7 @@ if (testimonialText) {
 // ─── Scroll Reveal Animations ──────────────────────────────────────
 if ('IntersectionObserver' in window) {
   const revealItems = document.querySelectorAll(
-    '.trust-card, .area-card, .audience-item, .stat-item'
+    '[data-reveal], .trust-card, .area-card, .audience-item, .stat-item'
   );
 
   revealItems.forEach((el, i) => {
@@ -366,7 +369,7 @@ if ('IntersectionObserver' in window) {
 }
 
 // ─── Area Card: Ripple Effect on Click ────────────────────────────
-document.querySelectorAll('.area-card').forEach(card => {
+document.querySelectorAll('.area-card, #learning-areas a[data-category]').forEach(card => {
   card.addEventListener('click', e => {
     const ripple = document.createElement('span');
     const rect   = card.getBoundingClientRect();
