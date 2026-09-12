@@ -1,11 +1,26 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { useUI } from '../context/UIContext'
 import SectionLink from './SectionLink'
 
+const LEARN_ITEMS = [
+  { label: 'All Learning Areas', href: '#learning-areas' },
+  { label: 'Technology & Development', href: '#technology' },
+  { label: 'Data & Analytics', href: '#data' },
+  { label: 'Cybersecurity', href: '#cybersecurity' },
+  { label: 'AI & Emerging Tech', href: '#ai' }
+]
+
+const SUPPORT_ITEMS = [
+  { label: 'Help Center', href: '#footer' },
+  { label: 'Contact Support', href: '#footer' },
+  { label: 'System Requirements', href: '#footer' },
+  { label: 'FAQs', href: '#footer' }
+]
+
 function BrandMark() {
   return (
-    <svg viewBox="0 0 100 100" className="w-12 h-12" aria-hidden="true">
+    <svg viewBox="0 0 100 100" className="w-full h-full" aria-hidden="true">
       <circle cx="50" cy="50" r="46" fill="#005B5C" stroke="#D4AF37" strokeWidth="4" />
       <circle cx="50" cy="50" r="38" fill="none" stroke="#FFFFFF" strokeWidth="1.5" strokeDasharray="3,3" />
       <path d="M50 18 L62 38 L84 38 L66 52 L73 74 L50 60 L27 74 L34 52 L16 38 L38 38 Z" fill="#D4AF37" opacity="0.3" />
@@ -16,93 +31,209 @@ function BrandMark() {
   )
 }
 
+function TopLink({ href, children }) {
+  return (
+    <a
+      href={href}
+      className="inline-flex items-center whitespace-nowrap rounded-md px-3 py-2 text-sm font-semibold text-ink transition-colors hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+    >
+      {children}
+    </a>
+  )
+}
+
+function NavDropdown({ label, items }) {
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+
+  useEffect(() => {
+    if (!open) return undefined
+    function onDoc(e) {
+      if (ref.current && !ref.current.contains(e.target)) setOpen(false)
+    }
+    function onKey(e) {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    document.addEventListener('mousedown', onDoc)
+    document.addEventListener('keydown', onKey)
+    return () => {
+      document.removeEventListener('mousedown', onDoc)
+      document.removeEventListener('keydown', onKey)
+    }
+  }, [open])
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        type="button"
+        aria-expanded={open}
+        aria-haspopup="true"
+        onClick={() => setOpen((o) => !o)}
+        className="inline-flex items-center gap-1 whitespace-nowrap rounded-md px-3 py-2 text-sm font-semibold text-ink transition-colors hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+      >
+        {label}
+        <svg viewBox="0 0 20 20" aria-hidden="true" className={`h-4 w-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}>
+          <path d="M5.5 7.5 10 12l4.5-4.5" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </button>
+      {open && (
+        <div className="absolute left-0 top-full z-50 mt-1 w-56 rounded-xl border border-line bg-white p-2 shadow-xl">
+          {items.map((i) => (
+            <a
+              key={i.href}
+              href={i.href}
+              className="block whitespace-nowrap rounded-lg px-3 py-2 text-sm text-ink transition-colors hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+            >
+              {i.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function MobileNav({ open, openModal }) {
+  const links = [
+    { label: 'Learn', href: '#learning-areas' },
+    { label: 'Certifications', href: '#certifications' },
+    { label: 'For Institutions', href: '#audience' },
+    { label: 'Partners', href: '#impact' },
+    { label: 'About JEF', href: '#about' },
+    { label: 'Support', href: '#footer' }
+  ]
+
+  return (
+    <div
+      id="mobile-nav"
+      className={`xl:hidden overflow-hidden bg-white transition-all duration-300 ease-in-out ${open ? 'max-h-[560px] opacity-100' : 'max-h-0 opacity-0'}`}
+      aria-hidden={!open}
+      {...(!open ? { inert: '' } : {})}
+    >
+      <nav className="px-4 sm:px-6" aria-label="Mobile navigation">
+        <div className="grid gap-0.5 border-t border-line">
+          {links.map((l) => (
+            <a
+              key={l.label}
+              href={l.href}
+              className="rounded-lg px-3 py-3 text-base font-semibold text-ink transition-colors hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+            >
+              {l.label}
+            </a>
+          ))}
+        </div>
+        <div className="mt-2 grid gap-2.5 border-t border-line py-4 pb-6">
+          <button
+            type="button"
+            onClick={() => openModal('login')}
+            className="h-11 w-full rounded-lg border border-teal bg-white px-4 text-sm font-bold text-teal transition-colors hover:bg-teal/[0.08]"
+          >
+            Student Login
+          </button>
+          <button
+            type="button"
+            onClick={() => openModal('register')}
+            className="h-11 w-full rounded-lg bg-teal px-4 text-sm font-bold text-white transition-colors hover:bg-teal-dark"
+          >
+            Register
+          </button>
+        </div>
+      </nav>
+    </div>
+  )
+}
+
 function HomeHeader() {
   const { openModal } = useUI()
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-line" id="header">
-      <div className="max-w-[1200px] mx-auto px-6 py-3 flex items-center gap-4">
-        <Link className="flex items-center gap-3 shrink-0" to="/" aria-label="JNTUH Education Foundation Home">
-          <div className="w-12 h-12 shrink-0">
-            <BrandMark />
-          </div>
-          <div className="leading-tight">
-            <span className="block font-heading font-extrabold text-navy text-lg tracking-wide">JNTUH</span>
-            <span className="block text-[0.65rem] font-bold tracking-[0.2em] text-muted">EDUCATION FOUNDATION</span>
-            <span className="block text-xs text-teal font-semibold italic">Learn. Certify. Build Your Career.</span>
-          </div>
-        </Link>
-
-        <button
-          className="lg:hidden ml-auto w-10 h-10 grid place-items-center rounded-lg border border-line"
-          type="button"
-          aria-expanded={mobileOpen}
-          aria-controls="site-nav"
-          aria-label="Toggle navigation menu"
-          onClick={() => setMobileOpen((v) => !v)}
-        >
-          <span className="block w-5 h-0.5 bg-navy mb-1"></span>
-          <span className="block w-5 h-0.5 bg-navy mb-1"></span>
-          <span className="block w-5 h-0.5 bg-navy"></span>
-        </button>
-
-        <nav className="hidden lg:flex items-center gap-6 ml-8 text-[0.95rem] font-semibold text-ink" id="site-nav" aria-label="Main navigation">
-          <div className="relative group">
-            <a href="#learning-areas" className="hover:text-teal py-2 inline-flex items-center gap-1">Learn <span>▾</span></a>
-            <div className="absolute left-0 top-full min-w-[220px] bg-white border border-line rounded-xl shadow-xl p-2 hidden group-hover:block">
-              <a className="block px-3 py-2 rounded-lg hover:bg-soft hover:text-teal" href="#learning-areas">All Learning Areas</a>
-              <a className="block px-3 py-2 rounded-lg hover:bg-soft hover:text-teal" href="#technology">Technology &amp; Development</a>
-              <a className="block px-3 py-2 rounded-lg hover:bg-soft hover:text-teal" href="#data">Data &amp; Analytics</a>
-              <a className="block px-3 py-2 rounded-lg hover:bg-soft hover:text-teal" href="#cybersecurity">Cybersecurity</a>
-              <a className="block px-3 py-2 rounded-lg hover:bg-soft hover:text-teal" href="#ai">AI &amp; Emerging Tech</a>
+    <header className="sticky top-0 z-50 w-full border-b border-line bg-white shadow-[0_1px_3px_rgba(7,23,53,0.04)]">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center gap-3 sm:gap-4 md:h-[72px] lg:h-20 lg:gap-6">
+          {/* Brand / logo */}
+          <a href="/" aria-label="JNTUH Education Foundation Home" className="flex shrink-0 min-w-0 items-center gap-2.5 sm:gap-3">
+            <div className="h-10 w-10 shrink-0 lg:h-12 lg:w-12">
+              <BrandMark />
             </div>
-          </div>
-          <a href="#certifications" className="hover:text-teal">Certifications</a>
-          <a href="#audience" className="hover:text-teal">For Institutions</a>
-          <a href="#impact" className="hover:text-teal">Partners</a>
-          <a href="#about" className="hover:text-teal">About JEF</a>
-          <div className="relative group">
-            <a href="#footer" className="hover:text-teal py-2 inline-flex items-center gap-1">Support <span>▾</span></a>
-            <div className="absolute left-0 top-full min-w-[200px] bg-white border border-line rounded-xl shadow-xl p-2 hidden group-hover:block">
-              <a className="block px-3 py-2 rounded-lg hover:bg-soft hover:text-teal" href="#footer">Help Center</a>
-              <a className="block px-3 py-2 rounded-lg hover:bg-soft hover:text-teal" href="#footer">Contact Support</a>
-              <a className="block px-3 py-2 rounded-lg hover:bg-soft hover:text-teal" href="#footer">System Requirements</a>
-              <a className="block px-3 py-2 rounded-lg hover:bg-soft hover:text-teal" href="#footer">FAQs</a>
+            <div className="min-w-0 leading-tight">
+              <span className="block whitespace-nowrap font-heading text-[15px] font-extrabold tracking-wide text-navy sm:text-base lg:text-lg">JNTUH</span>
+              <span className="block whitespace-nowrap text-[0.58rem] font-bold tracking-[0.18em] text-muted sm:text-[0.62rem] lg:text-[0.65rem]">EDUCATION FOUNDATION</span>
+              <span className="hidden whitespace-nowrap text-xs font-semibold italic text-teal sm:block">Learn. Certify. Build Your Career.</span>
             </div>
-          </div>
-        </nav>
+          </a>
 
-        <div className="hidden lg:flex items-center gap-2.5 ml-auto">
-          <button
-            className="w-10 h-10 grid place-items-center rounded-full border border-line text-navy hover:border-teal hover:text-teal [&_svg]:w-5 [&_svg]:h-5"
-            onClick={() => openModal('search')}
-            type="button"
-            aria-label="Open search dialog"
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M21 21l-4.35-4.35M16.5 10.5a6 6 0 11-12 0 6 6 0 0112 0z" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-            </svg>
-          </button>
-          <button className="px-5 py-2.5 rounded-lg text-sm font-bold border border-teal text-teal hover:bg-teal/5" onClick={() => openModal('login')} type="button">
-            Student Login
-          </button>
-          <button className="px-5 py-2.5 rounded-lg text-sm font-bold bg-teal text-white hover:bg-teal-dark" onClick={() => openModal('register')} type="button">
-            Register
-          </button>
+          {/* Desktop navigation */}
+          <nav className="ml-2 hidden items-center xl:flex 2xl:ml-6" id="site-nav" aria-label="Main navigation">
+            <NavDropdown label="Learn" items={LEARN_ITEMS} />
+            <TopLink href="#certifications">Certifications</TopLink>
+            <TopLink href="#audience">For Institutions</TopLink>
+            <TopLink href="#impact">Partners</TopLink>
+            <TopLink href="#about">About JEF</TopLink>
+            <NavDropdown label="Support" items={SUPPORT_ITEMS} />
+          </nav>
+
+          {/* Desktop actions */}
+          <div className="ml-auto hidden shrink-0 items-center gap-2.5 xl:flex">
+            <button
+              type="button"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-navy transition-colors hover:border-teal hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+              onClick={() => openModal('search')}
+              aria-label="Open search dialog"
+            >
+              <svg viewBox="0 0 24 24" className="h-[18px] w-[18px]" aria-hidden="true">
+                <path d="M21 21l-4.35-4.35M16.5 10.5a6 6 0 11-12 0 6 6 0 0112 0z" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={() => openModal('login')}
+              className="inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg border border-teal bg-white px-4 text-sm font-semibold text-teal transition-colors hover:bg-teal/[0.08] sm:px-5"
+            >
+              Student Login
+            </button>
+            <button
+              type="button"
+              onClick={() => openModal('register')}
+              className="inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-teal px-4 text-sm font-semibold text-white transition-colors hover:bg-teal-dark sm:px-5"
+            >
+              Register
+            </button>
+          </div>
+
+          {/* Mobile controls */}
+          <div className="ml-auto flex shrink-0 items-center gap-2 xl:hidden sm:gap-2.5">
+            <button
+              type="button"
+              onClick={() => openModal('login')}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-navy transition-colors hover:border-teal hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+              aria-label="Student login"
+            >
+              <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" fill="none" />
+              </svg>
+            </button>
+            <button
+              type="button"
+              onClick={() => setMobileOpen((o) => !o)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-line text-navy transition-colors hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-nav"
+              aria-label="Toggle navigation menu"
+            >
+              <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
+                {mobileOpen ? (
+                  <path d="M6 6l12 12M6 18L18 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                ) : (
+                  <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className={`lg:hidden ${mobileOpen ? '' : 'hidden'} border-t border-line bg-white px-6 py-4`} id="mobile-nav">
-        <div className="grid gap-1 font-semibold">
-          <a className="px-2 py-2.5 rounded-lg hover:bg-soft" href="#learning-areas">Learn</a>
-          <a className="px-2 py-2.5 rounded-lg hover:bg-soft" href="#certifications">Certifications</a>
-          <a className="px-2 py-2.5 rounded-lg hover:bg-soft" href="#audience">For Institutions</a>
-          <a className="px-2 py-2.5 rounded-lg hover:bg-soft" href="#impact">Partners</a>
-          <a className="px-2 py-2.5 rounded-lg hover:bg-soft" href="#about">About JEF</a>
-          <a className="px-2 py-2.5 rounded-lg hover:bg-soft" href="#footer">Support</a>
-        </div>
-      </div>
+      <MobileNav open={mobileOpen} openModal={openModal} />
     </header>
   )
 }
