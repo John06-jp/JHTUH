@@ -19,8 +19,9 @@ export default function About() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 grid gap-10 lg:grid-cols-2 items-start">
         <div>
           <p className="text-teal font-extrabold tracking-widest uppercase text-xs mb-3">Partnership</p>
-          <h2 id="about-heading" className="font-heading font-bold text-navy tracking-tight text-3xl md:text-4xl mb-3">
-            About Skillsoft
+          <h2 id="about-heading" className="font-heading font-bold text-navy tracking-tight text-3xl md:text-4xl mb-3 inline-flex flex-wrap items-center gap-2 md:gap-3">
+            About
+            <img src="/skillsoft_logo.png" alt="Skillsoft" className="h-8 w-auto object-contain md:h-10" />
           </h2>
           <div className="grid gap-4 text-muted leading-relaxed max-w-prose mb-6">
             <p>

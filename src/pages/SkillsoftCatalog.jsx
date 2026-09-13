@@ -43,15 +43,7 @@ const EXPLORE_GROUPS = [
 const focusCls =
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal'
 
-function StatCard({ label, value, sub }) {
-  return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm">
-      <p className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-slate-300">{label}</p>
-      <p className="mt-2 text-xl font-extrabold text-white">{value}</p>
-      {sub ? <p className="mt-1.5 text-xs text-teal-light/90">{sub}</p> : null}
-    </div>
-  )
-}
+
 
 function ChipButton({ label, active, onClick, tone = 'light' }) {
   const activeCls = tone === 'dark'
@@ -236,27 +228,7 @@ export default function SkillsoftCatalogPage() {
           <span>Skillsoft Catalog</span>
         </div>
 
-        {/* Catalog header */}
-        <header className="overflow-hidden rounded-[24px] border border-line bg-gradient-to-br from-navy via-[#0f2b45] to-[#0c4f60] p-6 text-white shadow-[0_28px_80px_rgba(15,39,57,0.18)] md:p-8">
-          <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-teal-light">Degree Plus / Skillsoft</p>
-          <h1 className="mt-2 font-heading text-3xl font-bold tracking-tight md:text-4xl">Skillsoft Course Catalog</h1>
-          <p className="mt-3 max-w-2xl text-base text-slate-200">
-            Explore professional courses across AI, technology, data, cloud, cybersecurity, business and more.
-          </p>
-
-          <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Quick category shortcuts">
-            {SKILLSOFT_CATEGORIES.filter((t) => t !== 'All').map((tag) => (
-              <ChipButton key={tag} tone="dark" label={tag} active={activeCat === tag} onClick={() => setCat(tag)} />
-            ))}
-          </div>
-
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard label="Standard fee" value="INR 5,000" />
-            <StatCard label="Offer fee" value="INR 550" sub="Limited-period offer" />
-            <StatCard label="Provider" value="Degree Plus / SPPU Edutech Foundation" />
-            <StatCard label="Contact" value="+91 8956327294" />
-          </div>
-        </header>
+        
 {/* Search + filter + sort controls (sticky on mobile) */}
         <div className="mt-6 sticky top-[64px] z-40 border-b border-line bg-soft/95 backdrop-blur-md lg:static lg:border-0 lg:bg-transparent">
           <div className="px-3 sm:px-4 lg:px-0">

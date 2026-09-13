@@ -151,7 +151,7 @@ function HomeHeader() {
             <div className="hidden min-w-0 leading-tight md:block">
               <span className="block whitespace-nowrap font-heading text-[15px] font-extrabold tracking-wide text-navy sm:text-base lg:text-lg">Area 51</span>
               <span className="block whitespace-nowrap text-[0.58rem] font-bold tracking-[0.18em] text-teal sm:text-[0.62rem] lg:text-[0.65rem]">INFORMATION TECHNOLOGY</span>
-              <span className="hidden whitespace-nowrap text-[0.68rem] font-medium text-navy sm:block">Enhancing Your Everyday Experience</span>
+              <span className="hidden whitespace-nowrap text-[0.68rem] font-medium text-navy sm:block">Services</span>
             </div>
           </a>
 
@@ -444,56 +444,58 @@ function SubHeader() {
   }, [mobileOpen])
 
   return (
-    <header className="site-header h-16 lg:h-20" id="header">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
-        <BrandLockup />
+    <>
+      <header className="site-header h-16 lg:h-20" id="header">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:px-8">
+          <BrandLockup />
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
-          <Link to="/" className={`${navLinkCls} ${pathname === '/' ? 'text-teal' : ''}`}>
-            Home
-          </Link>
-          <ProgramsDropdown current={pathname} />
-          <Link to="/skillsoft-catalog" className={`${navLinkCls} ${pathname === '/skillsoft-catalog' ? 'text-teal' : ''}`}>
-            Skillsoft Catalog
-          </Link>
-          <SectionLink to="/" hash="learning-areas" className={navLinkCls}>
-            Learning Paths
-          </SectionLink>
-          <SectionLink to="/" hash="about" className={navLinkCls}>
-            About
-          </SectionLink>
-          <SectionLink to="/" hash="footer" className={navLinkCls}>
-            Contact
-          </SectionLink>
-        </nav>
+          <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
+            <Link to="/" className={`${navLinkCls} ${pathname === '/' ? 'text-teal' : ''}`}>
+              Home
+            </Link>
+            <ProgramsDropdown current={pathname} />
+            <Link to="/skillsoft-catalog" className={`${navLinkCls} ${pathname === '/skillsoft-catalog' ? 'text-teal' : ''}`}>
+              Skillsoft Catalog
+            </Link>
+            <SectionLink to="/" hash="learning-areas" className={navLinkCls}>
+              Learning Paths
+            </SectionLink>
+            <SectionLink to="/" hash="about" className={navLinkCls}>
+              About
+            </SectionLink>
+            <SectionLink to="/" hash="footer" className={navLinkCls}>
+              Contact
+            </SectionLink>
+          </nav>
 
-        <div className="hidden h-11 items-center gap-2 lg:flex">
-          <SectionLink
-            to="/cse-courses"
-            className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-lg bg-teal px-4 text-sm font-bold text-white transition-colors hover:bg-teal-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
-          >
-            View CSE Subjects
-          </SectionLink>
+          <div className="hidden h-11 items-center gap-2 lg:flex">
+            <SectionLink
+              to="/cse-courses"
+              className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-lg bg-teal px-4 text-sm font-bold text-white transition-colors hover:bg-teal-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+            >
+              View CSE Subjects
+            </SectionLink>
+          </div>
+
+          <div className="flex shrink-0 items-center lg:hidden">
+            <button
+              type="button"
+              onClick={() => setMobileOpen((o) => !o)}
+              aria-expanded={mobileOpen}
+              aria-controls="site-nav"
+              aria-label="Toggle navigation menu"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-line text-navy transition-colors hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+            >
+              <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
+                <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </button>
+          </div>
         </div>
-
-        <div className="flex shrink-0 items-center lg:hidden">
-          <button
-            type="button"
-            onClick={() => setMobileOpen((o) => !o)}
-            aria-expanded={mobileOpen}
-            aria-controls="site-nav"
-            aria-label="Toggle navigation menu"
-            className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-line text-navy transition-colors hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
-          >
-            <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
-              <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-          </button>
-        </div>
-      </div>
+      </header>
 
       <MobileDrawer open={mobileOpen} onClose={() => setMobileOpen(false)} openModal={openModal} />
-    </header>
+    </>
   )
 }
 export default function Header() {
