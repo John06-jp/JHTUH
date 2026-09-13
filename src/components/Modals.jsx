@@ -1,16 +1,10 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useUI } from '../context/UIContext'
+import { SKILLSOFT_COURSES } from '../data/skillsoftCatalog'
 
-// Port of script.js mockCourses used by the search dialog.
-const MOCK_COURSES = {
-  python: ['Python Fundamentals (Beginner)', 'Python for Data Science (Intermediate)'],
-  'cloud computing': ['AWS Cloud Practitioner (Beginner)', 'Azure Administrator (Intermediate)'],
-  cybersecurity: ['CompTIA Security+ Prep (Intermediate)', 'Ethical Hacking 101 (Beginner)'],
-  ai: ['AI Fundamentals (Beginner)', 'Machine Learning Basics (Intermediate)'],
-  'machine learning': ['Machine Learning Basics (Intermediate)', 'Deep Learning Foundations (Advanced)']
-}
-
-const POPULAR = ['Python', 'Cloud Computing', 'Cybersecurity', 'AI', 'Machine Learning']
+// Search dialog backed by the real Skillsoft catalog (source: Content-Mapping workbook).
+const POPULAR = ['Python', 'AI', 'Data', 'Cybersecurity', 'DevOps', 'Machine Learning']
 
 function ModalShell({ children, onClose, width }) {
   return (
@@ -54,10 +48,11 @@ function SearchModal({ onClose }) {
       setSearched(false)
       return
     }
-    const out = []
-    Object.keys(MOCK_COURSES).forEach((key) => {
-      if (key.includes(q)) out.push(...MOCK_COURSES[key])
-    })
+    const words = q.split(/\s+/)
+    const out = SKILLSOFT_COURSES.filter((c) => {
+      const hay = [c.title, c.overview, c.category, ...(c.outcomes || [])].join(' ').toLowerCase()
+      return words.every((w) => hay.includes(w))
+    }).slice(0, 8)
     setResults(out)
     setSearched(true)
     if (out.length) showToast(`Found ${out.length} course${out.length > 1 ? 's' : ''} for “${term}”.`)
@@ -105,12 +100,21 @@ function SearchModal({ onClose }) {
       </form>
       <div className="mt-4 grid gap-2.5">
         {searched && results.length === 0 && (
-          <p className="text-sm text-muted">No courses match “{query}”. Try a popular search.</p>
+          <p className="text-sm text-muted">No courses match “{query}”. Try “Python”, “AI”, “Data”, or “Security”.</p>
         )}
-        {results.map((r, i) => (
-          <div key={i} className="border border-line rounded-xl px-4 py-2.5 text-sm">
-            {r}
-          </div>
+        {results.map((course) => (
+          <Link
+            key={course.slug}
+            to={'/skillsoft-catalog#' + course.slug}
+            onClick={onClose}
+            className="flex items-center justify-between gap-3 rounded-xl border border-line px-4 py-2.5 text-sm transition-colors hover:border-teal hover:bg-teal-bg"
+          >
+            <span>
+              <span className="block font-semibold text-navy">{course.title}</span>
+              <span className="block text-xs text-muted">{course.category} · {course.duration}</span>
+            </span>
+            <span className="shrink-0 text-xs font-bold uppercase tracking-wider text-teal">View</span>
+          </Link>
         ))}
       </div>
     </ModalShell>

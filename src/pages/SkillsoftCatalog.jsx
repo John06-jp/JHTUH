@@ -1,169 +1,24 @@
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { SKILLSOFT_CATEGORIES, SKILLSOFT_COURSES, SKILLSOFT_DOMAINS } from '../data/skillsoftCatalog'
 
-const catalogCourses = [
-  {
-    title: 'AI for Data Analytics & BI',
-    duration: '30 hours, 42 minutes',
-    page: 'https://degreeplus.in/skillsoft_latest_new/ai-for-data-analytics-bi/',
-    apply: 'https://degreeplus.in/SPPU-Online/skillsoft/?courseId=1',
-    overview: 'Introduces AI and generative AI for data analytics and business intelligence, including foundational AI concepts, ethical considerations, prompt engineering, data manipulation, and visualization.',
-    outcomes: [
-      'Understand machine learning, deep learning, neural networks, generative AI, and GPT models.',
-      'Apply responsible and ethical AI practices.',
-      'Create prompts for manipulating and analyzing data.',
-      'Filter, group, combine, and visualize data effectively.',
-      'Use AI-powered features in Power BI and train ML models for business insights.',
-      'Build interactive visualizations with tools such as D3.js and generative AI.'
-    ]
-  },
-  {
-    title: 'AI for Data Science',
-    duration: '45 hours, 53 minutes, 22 seconds',
-    page: 'https://degreeplus.in/skillsoft_latest/ai-for-data-science/',
-    apply: 'https://degreeplus.in/SPPU-Online/skillsoft/?courseId=2',
-    overview: 'Covers generative AI, deep learning, large language models, natural language processing, and responsible AI for real-world applications.',
-    outcomes: [
-      'Build a foundation in generative AI, deep learning, and LLMs.',
-      'Implement, fine-tune, and evaluate AI and NLP models with tools such as Hugging Face.',
-      'Understand ethical considerations and the environmental impact of AI.',
-      'Apply AI to content creation, data generation, customer engagement, and other business functions.'
-    ]
-  },
-  {
-    title: 'AI for DevOps',
-    duration: '30 hours, 23 minutes, 35 seconds',
-    page: 'https://degreeplus.in/skillsoft_latest/ai-for-devops/',
-    apply: 'https://degreeplus.in/SPPU-Online/skillsoft/?courseId=3',
-    overview: 'Introduces AI and generative AI concepts for DevOps, IT automation, and responsible technology adoption.',
-    outcomes: [
-      'Understand AI and generative AI technologies.',
-      'Apply prompt engineering, IT automation, and AI-powered DevOps techniques.',
-      'Use AI responsibly in IT and DevOps.',
-      'Apply AI solutions through case studies and simulators.',
-      'Identify emerging AI and DevOps trends and tools.'
-    ]
-  },
-  {
-    title: 'AI for Programmers',
-    duration: '30 hours, 26 minutes, 41 seconds',
-    page: 'https://degreeplus.in/skillsoft_latest/ai-for-programmers/',
-    apply: 'https://degreeplus.in/SPPU-Online/skillsoft/?courseId=4',
-    overview: 'An introductory AI and generative AI journey for programmers, covering AI concepts, ethical considerations, and programming-oriented applications.',
-    outcomes: [
-      'Understand the practical use of AI in coding workflows.',
-      'Apply AI concepts and prompt engineering for software tasks.',
-      'Improve productivity using AI-assisted development processes.',
-      'Leverage responsible AI practices in programming.'
-    ]
-  },
-  {
-    title: 'AI for Software Engineers',
-    duration: '30 hours, 33 minutes, 13 seconds',
-    page: 'https://degreeplus.in/skillsoft_latest/ai-for-software-engineers/',
-    apply: 'https://degreeplus.in/SPPU-Online/skillsoft/?courseId=5',
-    overview: 'Develops software-engineering skills in generative AI, NLP, LLMs, transformers, prompt engineering, and responsible AI.',
-    outcomes: [
-      'Explore GPT models, deep learning, and transformers.',
-      'Use prompt engineering and LLMs productively.',
-      'Work with Hugging Face and PyTorch.',
-      'Understand fine-tuning, RAG systems, and responsible AI practices.'
-    ]
-  },
-  {
-    title: 'Banking and Finance',
-    duration: '30 hours, 17 minutes, 28 seconds',
-    page: 'https://degreeplus.in/skillsoft_latest/banking-and-finance/',
-    apply: 'https://degreeplus.in/SPPU-Online/skillsoft/?courseId=6',
-    overview: 'Combines finance fundamentals with AI, blockchain, automation, communication, time management, and leadership for a technology-driven financial sector.',
-    outcomes: [
-      'Build finance basics and decision-making skills.',
-      'Use Excel, dashboards, and data basics in finance contexts.',
-      'Understand banking, insurance, risk management, and financial statements.',
-      'Learn how AI, automation, blockchain, and infrastructure affect finance.'
-    ]
-  },
-  {
-    title: 'Business Skills',
-    duration: '29 hours, 21 minutes, 51 seconds',
-    page: 'https://degreeplus.in/skillsoft_latest/business-skills/',
-    apply: 'https://degreeplus.in/SPPU-Online/skillsoft/?courseId=7',
-    overview: 'Builds practical communication, problem-solving, time-management, decision-making, leadership, teamwork, and productivity skills for professional environments.',
-    outcomes: [
-      'Strengthen communication and teamwork.',
-      'Use analytics, design thinking, and problem-solving frameworks.',
-      'Improve time management and project execution.',
-      'Develop leadership, productivity, and digital work skills.'
-    ]
-  },
-  {
-    title: 'C Programming Proficiency',
-    duration: '29 hours, 22 minutes, 33 seconds',
-    page: 'https://degreeplus.in/skillsoft_latest/c-programming-proficiency/',
-    apply: 'https://degreeplus.in/SPPU-Online/skillsoft/?courseId=8',
-    overview: 'Combines operating-system fundamentals with a structured C programming journey, hands-on labs, real-world examples, and a final exam.',
-    outcomes: [
-      'Understand OS concepts such as processes, threads, and memory management.',
-      'Develop structured C programming skills with practical examples.',
-      'Learn pointers, memory handling, and file operations.',
-      'Write efficient and professional-quality C programs.'
-    ]
-  },
-  {
-    title: 'Cyber Security',
-    duration: '30 hours, 35 minutes, 25 seconds',
-    page: 'https://degreeplus.in/skillsoft_latest/cyber_security/',
-    apply: 'https://degreeplus.in/SPPU-Online/skillsoft/?courseId=9',
-    overview: 'Provides foundational networking and Windows knowledge together with cybersecurity concepts, threats, risk management, and ethical hacking.',
-    outcomes: [
-      'Understand networking, routing, and security protocols.',
-      'Get hands-on knowledge of Windows environments and digital security.',
-      'Recognize cyber threats and perform risk management.',
-      'Explore ethical hacking and personal cybersecurity practices.'
-    ]
-  },
-  {
-    title: 'Data Analysis with R',
-    duration: '30 hours, 57 minutes, 15 seconds',
-    page: 'https://degreeplus.in/skillsoft_latest_new/data-analysis-with-r/',
-    apply: 'https://degreeplus.in/SPPU-Online/skillsoft/?courseId=10',
-    overview: 'Teaches R programming for statistical analysis, data manipulation, dataset exploration, modeling, and data mining.',
-    outcomes: [
-      'Learn R programming structures and workflows.',
-      'Work with datasets and perform statistical analysis.',
-      'Use R for data mining and modeling tasks.',
-      'Apply practical analysis techniques to real-world data.'
-    ]
-  },
-  {
-    title: 'Design Thinking',
-    duration: '31 hours, 16 minutes, 46 seconds',
-    page: 'https://degreeplus.in/skillsoft_latest_new/design-thinking/',
-    apply: 'https://degreeplus.in/SPPU-Online/skillsoft/?courseId=11',
-    overview: 'Teaches a human-centered, iterative approach to problem-solving and innovation, from user research through prototyping and testing.',
-    outcomes: [
-      'Apply design-thinking principles to solve real-world problems.',
-      'Engage stakeholders and create user-centric solutions.',
-      'Create prototypes and test with users.',
-      'Develop innovation, customer experience, and creative leadership skills.'
-    ]
-  },
-  {
-    title: 'FinTech',
-    duration: '29 hours, 21 minutes, 51 seconds',
-    page: 'https://degreeplus.in/skillsoft_latest_new/fintech/',
-    apply: 'https://degreeplus.in/SPPU-Online/skillsoft/?courseId=12',
-    overview: 'Explores blockchain, cryptocurrency, Ethereum, Hyperledger Fabric, smart contracts, Python, DevOps, AI/ML, and automation in financial technology.',
-    outcomes: [
-      'Learn blockchain and cryptocurrency fundamentals.',
-      'Understand smart contracts, Ethereum, and security models.',
-      'Explore digital finance tools and fintech transformation.',
-      'Connect AI/ML, DevOps, and automation to financial technology.'
-    ]
-  }
-]
+const hasLink = (url) => url && url !== '#'
+
 
 export default function SkillsoftCatalogPage() {
-  const tags = ['AI', 'Data', 'Cybersecurity', 'Finance', 'DevOps', 'Programming']
+  const [query, setQuery] = useState('')
+  const [activeCat, setActiveCat] = useState('All')
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    return SKILLSOFT_COURSES.filter((c) => {
+      const inCat = activeCat === 'All' || c.category === activeCat
+      if (!inCat) return false
+      if (!q) return true
+      const hay = [c.title, c.overview, c.category, ...(c.outcomes || [])].join(' ').toLowerCase()
+      return q.split(/\s+/).every((w) => hay.includes(w))
+    })
+  }, [query, activeCat])
 
   return (
     <main className="bg-soft text-ink">
@@ -185,7 +40,7 @@ export default function SkillsoftCatalogPage() {
             </div>
 
             <div className="flex flex-wrap gap-2">
-              {tags.map((tag) => (
+              {SKILLSOFT_CATEGORIES.filter((t) => t !== 'All').map((tag) => (
                 <span key={tag} className="rounded-full border border-white/15 bg-white/8 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-teal-light backdrop-blur-sm">
                   {tag}
                 </span>
@@ -220,54 +75,90 @@ export default function SkillsoftCatalogPage() {
               <h2 className="font-heading text-2xl font-bold text-navy md:text-3xl">Available courses</h2>
             </div>
             <span className="inline-flex w-fit items-center rounded-full border border-teal/30 bg-teal-bg px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-teal">
-              {catalogCourses.length} courses
+              {filtered.length} of {SKILLSOFT_COURSES.length} courses
             </span>
           </div>
 
+          <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-center">
+            <label className="relative block flex-1">
+              <span className="sr-only">Search Skillsoft courses</span>
+              <svg viewBox="0 0 24 24" className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" aria-hidden="true">
+                <path d="M21 21l-4.35-4.35M16.5 10.5a6 6 0 11-12 0 6 6 0 0112 0z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search by role, skill, or technology…"
+                className="w-full min-h-[44px] rounded-xl border border-line bg-white pl-11 pr-4 text-sm text-ink outline-none transition-colors focus:border-teal focus:ring-2 focus:ring-teal/25"
+              />
+            </label>
+            <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar" role="group" aria-label="Filter courses by category">
+              {SKILLSOFT_CATEGORIES.map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() => setActiveCat(c)}
+                  aria-pressed={activeCat === c}
+                  className={`inline-flex min-h-[44px] shrink-0 items-center rounded-full border px-4 text-sm font-bold transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal ${activeCat === c ? 'border-teal bg-teal text-white shadow-sm' : 'border-line bg-white text-navy hover:border-teal/60 hover:text-teal'}`}
+                >
+                  {c}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div className="grid gap-5">
-            {catalogCourses.map((course, index) => (
+            {filtered.map((course) => (
               <article
-                key={course.title}
-                className="group overflow-hidden rounded-[26px] border border-line bg-white p-5 shadow-[0_12px_30px_rgba(17,24,39,0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-teal hover:shadow-[0_24px_48px_rgba(0,91,92,0.12)]"
+                key={course.slug}
+                id={course.slug}
+                className="group scroll-mt-24 overflow-hidden rounded-[26px] border border-line bg-white p-5 shadow-[0_12px_30px_rgba(17,24,39,0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-teal hover:shadow-[0_24px_48px_rgba(0,91,92,0.12)]"
               >
                 <img
-                  src={`/course-images/IMG${index + 1}.jpg`}
+                  src={course.image}
                   alt={`${course.title} course illustration`}
+                  loading="lazy"
                   className="mb-5 h-56 w-full rounded-2xl object-cover object-center"
                 />
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                   <div className="flex-1">
-                    <div className="mb-3 flex items-center gap-3">
-                      <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-teal-bg text-sm font-extrabold text-teal">
-                        {index + 1}
+                    <div className="mb-3 flex flex-wrap items-center gap-2">
+                      <span className="inline-flex items-center rounded-full bg-teal/[0.08] px-3 py-1 text-[0.7rem] font-extrabold uppercase tracking-[0.18em] text-teal">
+                        {course.category}
                       </span>
-                      <p className="text-[0.72rem] font-bold uppercase tracking-[0.22em] text-teal">Course {index + 1}</p>
+                      <p className="text-[0.72rem] font-bold uppercase tracking-[0.22em] text-teal">{course.duration}</p>
                     </div>
 
                     <h3 className="font-heading text-2xl font-bold text-navy leading-snug">{course.title}</h3>
-
-                    <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted">
-                      <span className="rounded-full border border-line bg-soft px-2.5 py-1.5 font-medium">{course.duration}</span>
-                    </div>
                   </div>
 
                   <div className="flex flex-col gap-2 sm:flex-row lg:flex-col">
-                    <a
-                      href={course.page}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-xl border border-teal bg-white px-4 py-2.5 text-sm font-bold text-teal transition-colors hover:bg-teal-bg"
-                    >
-                      Details
-                    </a>
-                    <a
-                      href={course.apply}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center justify-center rounded-xl bg-teal px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-teal-dark"
-                    >
-                      Apply now
-                    </a>
+                    {hasLink(course.page) && (
+                      <a
+                        href={course.page}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-teal bg-white px-4 py-2.5 text-sm font-bold text-teal transition-colors hover:bg-teal-bg"
+                      >
+                        Details
+                      </a>
+                    )}
+                    {hasLink(course.apply) && (
+                      <a
+                        href={course.apply}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex min-h-[44px] items-center justify-center rounded-xl bg-teal px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-teal-dark"
+                      >
+                        Apply now
+                      </a>
+                    )}
+                    {!hasLink(course.page) && !hasLink(course.apply) && (
+                      <span className="inline-flex min-h-[44px] items-center justify-center rounded-xl border border-dashed border-line bg-soft px-4 py-2.5 text-xs font-bold uppercase tracking-wider text-muted">
+                        Details coming soon
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -289,6 +180,27 @@ export default function SkillsoftCatalogPage() {
               </article>
             ))}
           </div>
+
+          {filtered.length === 0 && (
+            <div className="rounded-2xl border border-line bg-soft p-10 text-center text-muted">
+              No courses match your search or filter.
+            </div>
+          )}
+
+          <section className="mt-10 rounded-[26px] border border-line bg-soft/60 p-6" aria-label="Skillsoft content domains">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-teal">Content families</p>
+            <h2 className="mt-2 font-heading text-xl font-bold text-navy md:text-2xl">38 mapped Skillsoft domains</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted">
+              These are the Part-A content families from the mapping workbook that sit behind the tracks above.
+            </p>
+            <ul className="mt-4 flex flex-wrap gap-2">
+              {SKILLSOFT_DOMAINS.map((d) => (
+                <li key={d} className="rounded-full border border-line bg-white px-3 py-1.5 text-xs font-semibold text-navy">
+                  {d}
+                </li>
+              ))}
+            </ul>
+          </section>
         </section>
       </div>
     </main>
