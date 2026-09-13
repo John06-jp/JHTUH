@@ -156,7 +156,7 @@ function HomeHeader() {
             <div className="h-10 w-10 shrink-0 lg:h-12 lg:w-12">
               <BrandMark />
             </div>
-            <div className="min-w-0 leading-tight">
+            <div className="hidden min-w-0 leading-tight md:block">
               <span className="block whitespace-nowrap font-heading text-[15px] font-extrabold tracking-wide text-navy sm:text-base lg:text-lg">JNTUH</span>
               <span className="block whitespace-nowrap text-[0.58rem] font-bold tracking-[0.18em] text-muted sm:text-[0.62rem] lg:text-[0.65rem]">EDUCATION FOUNDATION</span>
               <span className="hidden whitespace-nowrap text-xs font-semibold italic text-teal sm:block">Learn. Certify. Build Your Career.</span>
