@@ -1,38 +1,43 @@
 import { Link } from 'react-router-dom'
 
+// Soft atmospheric navy -> transparent dissolve (100% -> 80% -> 50% -> 25% -> 0%)
+const DISSOLVE = 'linear-gradient(to right, #071735 0%, #071735 48%, rgba(7,23,53,0.8) 52%, rgba(7,23,53,0.5) 55%, rgba(7,23,53,0.25) 57.5%, rgba(7,23,53,0) 60%)'
+
+// Readability overlay for small screens (image sits behind as a tinted backdrop)
+const MOBILE = 'linear-gradient(to top, rgba(7,23,53,0.96) 0%, rgba(7,23,53,0.82) 45%, rgba(7,23,53,0.62) 100%)'
+
 export default function Hero() {
   return (
     <section
       className="relative overflow-hidden bg-navy text-white"
       aria-labelledby="hero-title"
     >
-      {/* Photograph layer — right ~55% on large screens, full-bleed backdrop on mobile */}
-      <div className="absolute inset-0 z-0 lg:left-[43%]">
+      {/* Full-bleed background photograph - continues underneath the navy */}
+      <div className="absolute inset-0 z-0">
         <img
           src="/hero_laptop.png"
           alt="Modern laptop on a desk with a professional learning platform on screen"
           className="h-full w-full object-cover object-center"
           loading="eager"
-          sizes="(min-width: 1024px) 58vw, 100vw"
+          sizes="100vw"
         />
       </div>
 
-      {/* Soft fog that blurs the transition seam (subtle depth-of-field) */}
-      <div className="absolute inset-y-0 z-[1] hidden lg:block left-[30%] w-[26%] bg-navy/45 blur-3xl" aria-hidden="true" />
-
-      {/* Navy → transparent horizontal gradient: strongest far left, dissolving center-right */}
+      {/* Desktop: dark navy on the left fades to transparent over the image (no hard edge) */}
       <div
-        className="absolute inset-0 z-[2] hidden lg:block bg-gradient-to-r from-navy from-0% via-navy/90 via-[38%] to-transparent to-[84%]"
+        className="absolute inset-0 z-[1] hidden lg:block"
+        style={{ backgroundImage: DISSOLVE }}
         aria-hidden="true"
       />
 
-      {/* Mobile readability overlay (photo sits behind navy on small screens) */}
+      {/* Mobile: subtle vertical navy overlay keeps the text readable */}
       <div
-        className="absolute inset-0 z-[2] bg-gradient-to-t from-navy via-navy/85 to-navy/70 lg:hidden"
+        className="absolute inset-0 z-[1] lg:hidden"
+        style={{ backgroundImage: MOBILE }}
         aria-hidden="true"
       />
 
-      {/* Content — left column, ~45% width, kept safely on dark navy */}
+      {/* Content - left column, kept on the opaque part of the navy */}
       <div className="relative z-10 max-w-[1200px] mx-auto px-6 sm:px-8 py-16 md:py-20 lg:py-24">
         <div className="max-w-xl">
           <nav className="flex items-center gap-2 text-sm text-slate-300 mb-6" aria-label="Breadcrumb">
