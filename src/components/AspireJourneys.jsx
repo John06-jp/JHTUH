@@ -1,3 +1,30 @@
+const COURSE_IMAGES = [
+  '/course-images/IMG1.jpg',
+  '/course-images/IMG2.jpg',
+  '/course-images/IMG3.jpg',
+  '/course-images/IMG4.jpg',
+  '/course-images/IMG5.jpg',
+  '/course-images/IMG6.jpg',
+  '/course-images/IMG7.jpg',
+  '/course-images/IMG8.jpg',
+  '/course-images/IMG9.jpg',
+  '/course-images/IMG10.jpg',
+  '/course-images/IMG11.jpg',
+  '/course-images/IMG12.jpg',
+  '/course-images/IMG13.jpg',
+  '/course-images/IMG14.jpg',
+  '/course-images/IMG15.jpg',
+  '/course-images/IMG16.jpg',
+  '/course-images/IMG17.jpg',
+  '/course-images/IMG18.jpg',
+  '/course-images/IMG19.jpg',
+  '/course-images/IMG20.jpg',
+  '/course-images/IMG21.jpg',
+  '/course-images/IMG22.jpg',
+  '/course-images/IMG23.jpg',
+  '/course-images/IMG24.jpg'
+]
+
 const ASPIRE_JOURNEYS = [
   {
     title: 'Technology & Developer',
@@ -50,18 +77,22 @@ export default function AspireJourneys() {
           <div key={group.title}>
             <h3 className="font-heading text-navy text-xl font-bold mb-4">Aspire Journeys - {group.title}</h3>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {group.journeys.map(([title, image]) => (
+              {group.journeys.map(([title, fallbackImage], index) => {
+                const image = COURSE_IMAGES[index] || fallbackImage
+                return (
                 <article key={title} className="bg-white border border-line rounded-xl overflow-hidden shadow-sm hover:border-teal hover:shadow-md transition">
                   <img className="w-full aspect-[16/10] object-cover bg-soft" src={image} alt="" loading="lazy" />
                   <div className="p-4">
                     <h4 className="font-heading text-navy text-sm leading-snug font-bold">{title}</h4>
                   </div>
                 </article>
-              ))}
+                )
+              })}
             </div>
           </div>
-        ))}
-      </div>
+                )
+              })}
+            </div>
     </section>
   )
 }

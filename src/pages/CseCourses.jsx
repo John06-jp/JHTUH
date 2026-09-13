@@ -44,7 +44,8 @@ const CSE = {
     'Python Novice to Python Apprentice|Programming',
     'Software Testing and Software Testing Automation|QA / PE-3',
     'Virtual Reality|Emerging Technology'
-  ],  detailRows: [
+  ],
+  detailRows: [
     ['Full Stack Development', '51 hours 01 minutes', '3 Credits', 'CS631PE'],
     ['Scripting Languages', '53 hours 23 minutes', '3 Credits', 'CS633PE'],
     ['Mobile Development', '48 hours 59 minutes', '3 Credits', 'CS634PE'],
@@ -91,7 +92,19 @@ const CSE_FEATURED_IMAGES = [
   '/course-images/IMG9.jpg',
   '/course-images/IMG10.jpg',
   '/course-images/IMG11.jpg',
-  '/course-images/IMG12.jpg'
+  '/course-images/IMG12.jpg',
+  '/course-images/IMG13.jpg',
+  '/course-images/IMG14.jpg',
+  '/course-images/IMG15.jpg',
+  '/course-images/IMG16.jpg',
+  '/course-images/IMG17.jpg',
+  '/course-images/IMG18.jpg',
+  '/course-images/IMG19.jpg',
+  '/course-images/IMG20.jpg',
+  '/course-images/IMG21.jpg',
+  '/course-images/IMG22.jpg',
+  '/course-images/IMG23.jpg',
+  '/course-images/IMG24.jpg'
 ]
 
 CSE.featured = CSE.featured.map((item, index) => (
