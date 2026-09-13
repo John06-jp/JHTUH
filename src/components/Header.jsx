@@ -148,10 +148,10 @@ function HomeHeader() {
             <div className="h-10 w-10 shrink-0 lg:h-12 lg:w-12">
               <BrandMark />
             </div>
-            <div className="hidden min-w-0 leading-tight md:block">
+            <div className="block min-w-0 leading-tight">
               <span className="block whitespace-nowrap font-heading text-[15px] font-extrabold tracking-wide text-navy sm:text-base lg:text-lg">Area 51</span>
-              <span className="block whitespace-nowrap text-[0.58rem] font-bold tracking-[0.18em] text-teal sm:text-[0.62rem] lg:text-[0.65rem]">INFORMATION TECHNOLOGY</span>
-              <span className="hidden whitespace-nowrap text-[0.68rem] font-medium text-navy sm:block">Services</span>
+              <span className="block whitespace-nowrap text-[0.5rem] font-bold tracking-[0.14em] text-teal sm:text-[0.62rem] sm:tracking-[0.18em] lg:text-[0.65rem]">INFORMATION TECHNOLOGY</span>
+              <span className="block whitespace-nowrap text-[0.68rem] font-medium text-navy">Services</span>
             </div>
           </a>
 
