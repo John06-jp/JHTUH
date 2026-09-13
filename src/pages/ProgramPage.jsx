@@ -58,9 +58,20 @@ export function FeaturedGrid({ P }) {
     <section className="max-w-[1200px] mx-auto px-6 pt-12" id="featured" aria-labelledby="featured-h">
       <p className="text-teal font-extrabold tracking-widest uppercase text-xs mb-1.5">Examples</p>
       <h2 id="featured-h" className="section-title">Featured {P.short} courses</h2>
-      <div className="grid gap-3 mt-5 sm:grid-cols-2 lg:grid-cols-4" id="featured-grid">
+      <div className="grid gap-4 mt-5 sm:grid-cols-2 lg:grid-cols-4" id="featured-grid">
         {P.featured.map((f) => {
-          const [title, tag] = f.split('|')
+          const [title, tag, image] = f.split('|')
+          if (image) {
+            return (
+              <article key={f} className="featured-item overflow-hidden rounded-xl border border-line bg-white shadow-sm transition hover:border-teal hover:shadow-md">
+                <img className="h-36 w-full object-cover" src={image} alt="" loading="lazy" />
+                <div className="px-4 py-3.5">
+                  <h3 className="font-heading text-sm font-bold leading-snug text-navy">{title}</h3>
+                  <span className="mt-1 block text-xs font-semibold text-muted">{tag}</span>
+                </div>
+              </article>
+            )
+          }
           return (
             <div key={f} className="featured-item bg-navy text-teal-bg rounded-[10px] px-4 py-3.5 text-sm font-semibold border border-navyLight">
               {title}

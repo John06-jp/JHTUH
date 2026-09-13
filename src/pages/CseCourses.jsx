@@ -9,6 +9,7 @@ import {
   DetailTable,
   useProgramMeta
 } from './ProgramPage'
+import AspireJourneys from '../components/AspireJourneys'
 
 // Reconstructed CSE catalog (Computer Science Engineering). Mirrors the
 // original static page: 6 professional-elective groups + additional learning.
@@ -19,24 +20,31 @@ const CSE = {
   detailTitle: 'Professional Elective 3 Courses',
   detailNote: 'Year 3 Semester 2 detail with duration, credits and course code.',
   featured: [
-    'AI for Data Analytics & BI|Data • PE-1',
-    'AI for Data Science|Data • Analytics',
-    'AI for DevOps|DevOps • AI',
-    'AI for Programmers|AI • Coding',
-    'AI for Software Engineers|AI • Engineering',
-    'Cyber Security|Security • PE-4',
-    'Data Analysis with R|Data • Additional',
-    'Generative AI and Prompt Engineering Essentials|GenAI • LLMs',
-    'JavaScript Novice to Professional|Web • JavaScript',
+    'AI for Data Analytics & BI|Data / PE-1',
+    'AI for Data Science|Data / Analytics',
+    'AI for DevOps|DevOps / AI',
+    'AI for Programmers|AI / Coding',
+    'AI for Software Engineers|AI / Engineering',
+    'Banking and Finance|Business',
+    'Business Skills|Professional Skills',
+    'C Programming Proficiency|Programming',
+    'Cyber Security|Security / PE-4',
+    'Data Analysis with R|Data / Additional',
+    'Design Thinking|Innovation',
+    'FinTech|Business Technology',
+    'Generative AI and Prompt Engineering Essentials|GenAI / LLMs',
+    'JavaScript Novice to Professional|Web / JavaScript',
+    'Learn C#|Programming',
     'Learn Java|Programming',
-    'Machine Learning|AI • ML',
-    'Mastering Power BI|BI • Visualization',
-    'Mobile Development with Android|Mobile • PE-3',
-    'NLP & LLMs|AI • Language',
+    'Machine Learning|AI / ML',
+    'Mastering Power BI|BI / Visualization',
+    'Mobile Development with Android|Mobile / PE-3',
+    'NLP & LLMs|AI / Language',
+    'Prompt Engineering|GenAI',
     'Python Novice to Python Apprentice|Programming',
-    'Software Testing and Software Testing Automation|QA • PE-3'
-  ],
-  detailRows: [
+    'Software Testing and Software Testing Automation|QA / PE-3',
+    'Virtual Reality|Emerging Technology'
+  ],  detailRows: [
     ['Full Stack Development', '51 hours 01 minutes', '3 Credits', 'CS631PE'],
     ['Scripting Languages', '53 hours 23 minutes', '3 Credits', 'CS633PE'],
     ['Mobile Development', '48 hours 59 minutes', '3 Credits', 'CS634PE'],
@@ -71,6 +79,25 @@ const CSE = {
   ]
 }
 
+const CSE_FEATURED_IMAGES = [
+  '/course-images/IMG1.jpg',
+  '/course-images/IMG2.jpg',
+  '/course-images/IMG3.jpg',
+  '/course-images/IMG4.jpg',
+  '/course-images/IMG5.jpg',
+  '/course-images/IMG6.jpg',
+  '/course-images/IMG7.jpg',
+  '/course-images/IMG8.jpg',
+  '/course-images/IMG9.jpg',
+  '/course-images/IMG10.jpg',
+  '/course-images/IMG11.jpg',
+  '/course-images/IMG12.jpg'
+]
+
+CSE.featured = CSE.featured.map((item, index) => (
+  CSE_FEATURED_IMAGES[index] ? `${item}|${CSE_FEATURED_IMAGES[index]}` : item
+))
+
 export default function CseCourses() {
   const meta = useProgramMeta(CSE)
 
@@ -86,6 +113,7 @@ export default function CseCourses() {
 
       <SectionHero P={CSE} />
       <QuickHighlights peCount={meta.peCount} hasAdditional={meta.hasAdditional} semLabel={meta.semLabel} />
+      <AspireJourneys />
       <SubjectsGrid P={CSE} />
       <FeaturedGrid P={CSE} />
       <Catalog P={CSE} />

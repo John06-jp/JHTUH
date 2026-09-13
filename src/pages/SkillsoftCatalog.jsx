@@ -230,6 +230,11 @@ export default function SkillsoftCatalogPage() {
                 key={course.title}
                 className="group overflow-hidden rounded-[26px] border border-line bg-white p-5 shadow-[0_12px_30px_rgba(17,24,39,0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-teal hover:shadow-[0_24px_48px_rgba(0,91,92,0.12)]"
               >
+                <img
+                  src={`/course-images/IMG${index + 1}.jpg`}
+                  alt={`${course.title} course illustration`}
+                  className="mb-5 h-56 w-full rounded-2xl object-cover object-center"
+                />
                 <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
                   <div className="flex-1">
                     <div className="mb-3 flex items-center gap-3">
