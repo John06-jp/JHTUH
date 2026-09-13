@@ -59,7 +59,7 @@ export default function Hero() {
             Global learning content. Industry-recognized certifications.
           </p>
           <p className="text-slate-300 text-base md:text-lg leading-relaxed max-w-[34rem] mb-8">
-            JNTUH Education Foundation has partnered with Skillsoft to bring world-class
+            Area 51 has partnered with Skillsoft to bring world-class
             digital learning content to students, faculty and professionals.
           </p>
 

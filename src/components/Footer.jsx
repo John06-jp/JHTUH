@@ -27,21 +27,21 @@ function ContactDetails() {
       <div className="flex items-start gap-3">
         <span className="mt-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#f7b64a] text-sm font-bold text-[#0a1d2d]" aria-hidden="true">●</span>
         <p className="break-words leading-relaxed">
-          <span className="block font-bold text-white">SPPU EDUTECH FOUNDATION</span>
-          <span className="block">Savitribai Phule Pune University</span>
-          <span className="block">Campus, Ganeshkhind,</span>
-          <span className="block">Pune, Maharashtra 411007</span>
+          <span className="block font-bold text-white">AREA 51</span>
+          <span className="block">Area 51 Information Technology Services</span>
+          <span className="block">2nd Floor, Zamoras Building,</span>
+          <span className="block">Glodo St. San Francisco, Panabo City, Davao del Norte</span>
         </p>
       </div>
 
       <div className="flex items-center gap-3">
         <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#f7b64a] text-sm font-bold text-[#0a1d2d]" aria-hidden="true">☎</span>
-        <a href="tel:+918956327294" className="break-all underline-offset-4 transition-colors hover:text-[#7fe7db]">+91 - 8956327294</a>
+        <a href="tel:+639177621021" className="break-all underline-offset-4 transition-colors hover:text-[#7fe7db]">+63 917 762 1021</a>
       </div>
 
       <div className="flex items-center gap-3">
         <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#f7b64a] text-sm font-bold text-[#0a1d2d]" aria-hidden="true">✉</span>
-        <a href="mailto:info@degreeplus.in" className="break-all underline-offset-4 transition-colors hover:text-[#7fe7db]">info@degreeplus.in</a>
+        <a href="mailto:inquiry@area51.ph" className="break-all underline-offset-4 transition-colors hover:text-[#7fe7db]">inquiry@area51.ph</a>
       </div>
     </div>
   )
@@ -68,13 +68,15 @@ function HomeFooter() {
     <footer className="bg-[#0a1d2d] text-slate-200" id="footer">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-14">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr_1fr_1.2fr] xl:gap-14">
-          {/* Degree+ brand — always visible */}
+          {/* Area 51 brand — always visible */}
           <div>
-            <div className="text-3xl font-black leading-none tracking-tight text-white md:text-4xl">
-              Degree<span className="text-[#f7b64a]">+</span>
-            </div>
+            <img
+              src="/footterlogo.png"
+              alt="Area 51"
+              className="w-auto max-w-[220px]"
+            />
             <p className="mt-4 max-w-[18rem] text-base leading-relaxed text-slate-200">
-              We provide 21st Century job skills.
+              Davao's leading digital platforms and solutions provider.
             </p>
 
             <div className="mt-6 flex gap-3" id="social-links">
@@ -133,7 +135,7 @@ function HomeFooter() {
       <div className="border-t border-white/10">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 py-5 text-sm text-slate-300">
           <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
-            <p>© 2025 JNTUH Education Foundation. All Rights Reserved.</p>
+            <p>© 2026 Area 51. All Rights Reserved.</p>
             <div className="flex flex-wrap items-center gap-3">
               <a href="#" className="hover:text-[#7fe7db]">Privacy Policy</a>
               <span aria-hidden="true">|</span>
@@ -153,7 +155,7 @@ function SubFooter() {
     <footer className="site-footer" id="footer">
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '2.5rem 1.5rem', display: 'flex', gap: '2rem', flexWrap: 'wrap', justifyContent: 'space-between' }}>
         <div>
-          <h4 style={{ marginBottom: '.6rem', color: '#fff' }}>JNTUH Education Foundation</h4>
+          <h4 style={{ marginBottom: '.6rem', color: '#fff' }}>Area 51</h4>
           <p style={{ color: '#9FB2C8', fontSize: '.9rem', maxWidth: '22rem' }}>CSE Skillsoft guide — PE-1 to PE-6 plus additional learning.</p>
           <p style={{ marginTop: '.8rem' }}><Link to="/" style={{ color: '#36D1C4', fontWeight: 700 }}>Back to Skillsoft home</Link></p>
         </div>
@@ -170,7 +172,7 @@ function SubFooter() {
       </div>
       <div className="footer-bottom">
         <div className="footer-bottom-container">
-          <p className="copyright">© 2025 JNTUH Education Foundation. All Rights Reserved.</p>
+          <p className="copyright">© 2026 Area 51. All Rights Reserved.</p>
         </div>
       </div>
     </footer>

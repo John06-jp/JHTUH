@@ -1,6 +1,6 @@
-# JHTUH – JNTUH Education Foundation × Skillsoft
+# Area 51 × Skillsoft
 
-A React (Vite) single-page application for the JNTUH Education Foundation's
+A React (Vite) single-page application for Area 51's
 Skillsoft partner pages. Originally a set of static HTML/CSS/JS pages; this
 repository has been migrated to React.
 

@@ -20,16 +20,7 @@ const SUPPORT_ITEMS = [
 ]
 
 function BrandMark() {
-  return (
-    <svg viewBox="0 0 100 100" className="w-full h-full" aria-hidden="true">
-      <circle cx="50" cy="50" r="46" fill="#005B5C" stroke="#D4AF37" strokeWidth="4" />
-      <circle cx="50" cy="50" r="38" fill="none" stroke="#FFFFFF" strokeWidth="1.5" strokeDasharray="3,3" />
-      <path d="M50 18 L62 38 L84 38 L66 52 L73 74 L50 60 L27 74 L34 52 L16 38 L38 38 Z" fill="#D4AF37" opacity="0.3" />
-      <path d="M30 46 C35 42, 45 42, 50 47 C55 42, 65 42, 70 46 L70 68 C65 64, 55 64, 50 69 C45 64, 35 64, 30 68 Z" fill="#FFFFFF" />
-      <path d="M50 47 L50 69" stroke="#005B5C" strokeWidth="2" />
-      <circle cx="50" cy="30" r="7" fill="#E65100" />
-    </svg>
-  )
+  return <img src="/logo.png" className="h-full w-full object-contain" alt="Area 51 logo" />
 }
 
 function TopLink({ href, children }) {
@@ -100,7 +91,7 @@ function MobileNav({ open, openModal }) {
     { label: 'Certifications', href: '#certifications' },
     { label: 'For Institutions', href: '#audience' },
     { label: 'Partners', href: '#impact' },
-    { label: 'About JEF', href: '#about' },
+    { label: 'About', href: '#about' },
     { label: 'Support', href: '#footer' }
   ]
 
@@ -153,14 +144,14 @@ function HomeHeader() {
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center gap-3 sm:gap-4 md:h-[72px] lg:h-20 lg:gap-6">
           {/* Brand / logo */}
-          <a href="/" aria-label="JNTUH Education Foundation Home" className="flex shrink-0 min-w-0 items-center gap-2.5 sm:gap-3">
+          <a href="/" aria-label="Area 51 Home" className="flex shrink-0 min-w-0 items-center gap-2.5 sm:gap-3">
             <div className="h-10 w-10 shrink-0 lg:h-12 lg:w-12">
               <BrandMark />
             </div>
             <div className="hidden min-w-0 leading-tight md:block">
-              <span className="block whitespace-nowrap font-heading text-[15px] font-extrabold tracking-wide text-navy sm:text-base lg:text-lg">JNTUH</span>
-              <span className="block whitespace-nowrap text-[0.58rem] font-bold tracking-[0.18em] text-teal sm:text-[0.62rem] lg:text-[0.65rem]">EDUCATION FOUNDATION</span>
-              <span className="hidden whitespace-nowrap text-[0.68rem] font-medium text-navy sm:block">Learn. Certify. Build Your Career.</span>
+              <span className="block whitespace-nowrap font-heading text-[15px] font-extrabold tracking-wide text-navy sm:text-base lg:text-lg">Area 51</span>
+              <span className="block whitespace-nowrap text-[0.58rem] font-bold tracking-[0.18em] text-teal sm:text-[0.62rem] lg:text-[0.65rem]">INFORMATION TECHNOLOGY</span>
+              <span className="hidden whitespace-nowrap text-[0.68rem] font-medium text-navy sm:block">Enhancing Your Everyday Experience</span>
             </div>
           </a>
 
@@ -170,7 +161,7 @@ function HomeHeader() {
             <TopLink href="#certifications">Certifications</TopLink>
             <TopLink href="#audience">For Institutions</TopLink>
             <TopLink href="#impact">Partners</TopLink>
-            <TopLink href="#about">About JEF</TopLink>
+            <TopLink href="#about">About </TopLink>
             <NavDropdown label="Support" items={SUPPORT_ITEMS} />
           </nav>
 
@@ -248,13 +239,13 @@ const navLinkCls =
 
 function BrandLockup() {
   return (
-    <a href="/" aria-label="JNTUH Education Foundation Home" className="flex shrink-0 min-w-0 items-center gap-2.5 sm:gap-3">
+    <a href="/" aria-label="Area 51 Home" className="flex shrink-0 min-w-0 items-center gap-2.5 sm:gap-3">
       <span className="h-10 w-10 shrink-0 lg:h-11 lg:w-11">
         <BrandMark />
       </span>
       <span className="flex min-w-0 flex-col leading-tight">
-        <span className="whitespace-nowrap font-heading text-lg font-extrabold tracking-wide text-navy">JNTUH</span>
-        <span className="whitespace-nowrap text-[0.65rem] font-bold tracking-[0.16em] text-teal">EDUCATION FOUNDATION</span>
+        <span className="whitespace-nowrap font-heading text-lg font-extrabold tracking-wide text-navy">Area 51</span>
+        <span className="whitespace-nowrap text-[0.65rem] font-bold tracking-[0.16em] text-teal">Information Technology</span>
       </span>
     </a>
   )

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 const TESTIMONIALS = [
   {
     text: '“ Skillsoft’s content has helped me gain practical skills and confidence to apply my knowledge in real-world situations. ”',
-    author: '- JNTUH Learner'
+    author: '- Area 51 Learner'
   },
   {
     text: '“ The learning paths made it much easier to connect certification preparation with the exact skills needed for my next role. ”',

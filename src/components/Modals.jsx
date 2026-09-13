@@ -134,9 +134,9 @@ function LoginModal({ onClose }) {
           showToast('Login is a demo — no accounts are stored.')
         }}
       >
-        <p className="text-sm text-muted">Access your Skillsoft courses through JNTUH Education Foundation portal.</p>
+        <p className="text-sm text-muted">Access your Skillsoft courses through Area 51's portal.</p>
         <Field label="Student Roll No. or Email" htmlFor="login-email">
-          <input className="input" id="login-email" type="text" required placeholder="e.g. 21031A0501@jntuh.ac.in" />
+          <input className="input" id="login-email" type="text" required placeholder="e.g. user@area51.ph" />
         </Field>
         <Field label="Password" htmlFor="login-password">
           <input className="input" id="login-password" type="password" required placeholder="••••••••" />

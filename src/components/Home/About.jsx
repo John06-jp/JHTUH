@@ -27,7 +27,7 @@ export default function About() {
               Skillsoft is a leading global provider of digital learning, offering a comprehensive portfolio of learning content, skills assessments and performance support resources. With a legacy of more than 25 years, Skillsoft empowers learners and organizations to build essential skills, drive performance and achieve business outcomes.
             </p>
             <p>
-              Through our partnership, JNTUH Education Foundation brings Skillsoft’s premium learning library to students, faculty and professionals—helping them stay relevant, competitive and future-ready.
+              Through our partnership, Area 51 brings Skillsoft’s premium learning library to students, faculty and professionals—helping them stay relevant, competitive and future-ready.
             </p>
           </div>
           <a
