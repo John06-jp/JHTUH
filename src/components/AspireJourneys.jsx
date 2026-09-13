@@ -1,5 +1,17 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import Reveal from './Home/Reveal'
+import { SKILLSOFT_CATEGORIES, SKILLSOFT_COURSES } from '../data/skillsoftCatalog'
+
+const catalogSlugByTitle = new Map(
+  SKILLSOFT_COURSES.map((c) => [c.title.toLowerCase(), c.slug])
+)
+
+// Filters mirror the catalog categories so the journeys section stays aligned
+// with the Skillsoft mapping-workbook tracks (Part B 1-27).
+const CATEGORIES = SKILLSOFT_CATEGORIES.filter((c) =>
+  ['All', 'AI', 'Data & Analytics', 'Development', 'DevOps & Cloud', 'Cybersecurity', 'Business & Finance', 'Design & Innovation'].includes(c)
+)
 
 const COURSE_IMAGES = [
   '/course-images/IMG1.jpg',
@@ -28,9 +40,6 @@ const COURSE_IMAGES = [
   '/course-images/IMG24.jpg'
 ]
 
-// Category filtering is best-effort mapped from the path titles below.
-const CATEGORIES = ['All', 'Technology & Development', 'Leadership Development', 'Data & Analytics', 'Cybersecurity']
-
 const RAW_PATHS = [
   // ---- Technology & Developer ----
   { title: 'Security Analyst to Security Architect', category: 'Cybersecurity', desc: 'Grow from security operations into architecture leadership.' },
@@ -38,19 +47,19 @@ const RAW_PATHS = [
   { title: 'Network Security Specialist to CloudOps Security Architect', category: 'Cybersecurity', desc: 'Advance from network defense into cloud security architecture.' },
   { title: 'Penetration Tester to SecOps Engineer', category: 'Cybersecurity', desc: 'Move from offensive testing into security operations.' },
   { title: 'Data Analyst to Data Scientist', category: 'Data & Analytics', desc: 'Elevate from analysis into advanced data science.' },
-  { title: 'ML Programmer to ML Architect', category: 'Data & Analytics', desc: 'Progress from building models to architecting ML systems.' },
-  { title: 'AI Apprentice to AI Architect', category: 'Data & Analytics', desc: 'Develop from AI foundations into solution architecture.' },
-  { title: 'Enterprise Dev to Full Stack Dev', category: 'Technology & Development', desc: 'Broaden your skills across front and back end.' },
-  { title: 'Enterprise Dev to DevOps Engineer', category: 'Technology & Development', desc: 'Transition from development into delivery automation.' },
-  { title: 'Software Tester to DevOps Automated Tester', category: 'Technology & Development', desc: 'Learn automation within modern delivery pipelines.' },
-  { title: 'DevOps Engineer to CloudOps Architect', category: 'Technology & Development', desc: 'Move from operations into cloud architecture.' },
-  { title: 'Software Project Analyst to Sr. Software Project Manager', category: 'Technology & Development', desc: 'Lead larger software delivery teams effectively.' },
-  { title: 'Software Project Lead to Advanced Scrum Master', category: 'Technology & Development', desc: 'Master advanced, scaled agile facilitation.' },
-  { title: 'App Developer to Blockchain Solutions Architect', category: 'Technology & Development', desc: 'Apply blockchain to real-world application design.' },
-  { title: 'Python Novice to Pythonista', category: 'Technology & Development', desc: 'Become fluent in the Python programming language.' },
-  { title: 'Web Programmer to Apprentice Programmer', category: 'Technology & Development', desc: 'Strengthen core programming fundamentals.' },
-  { title: 'Apprentice Programmer to Journeyman Developer', category: 'Technology & Development', desc: 'Hone professional software craftsmanship.' },
-  { title: 'Journeyman Developer to Master Developer', category: 'Technology & Development', desc: 'Reach mastery in software engineering.' },
+  { title: 'ML Programmer to ML Architect', category: 'AI', desc: 'Progress from building models to architecting ML systems.' },
+  { title: 'AI Apprentice to AI Architect', category: 'AI', desc: 'Develop from AI foundations into solution architecture.' },
+  { title: 'Enterprise Dev to Full Stack Dev', category: 'Development', desc: 'Broaden your skills across front and back end.' },
+  { title: 'Enterprise Dev to DevOps Engineer', category: 'DevOps & Cloud', desc: 'Transition from development into delivery automation.' },
+  { title: 'Software Tester to DevOps Automated Tester', category: 'Development', desc: 'Learn automation within modern delivery pipelines.' },
+  { title: 'DevOps Engineer to CloudOps Architect', category: 'DevOps & Cloud', desc: 'Move from operations into cloud architecture.' },
+  { title: 'Software Project Analyst to Sr. Software Project Manager', category: 'Business & Finance', desc: 'Lead larger software delivery teams effectively.' },
+  { title: 'Software Project Lead to Advanced Scrum Master', category: 'Business & Finance', desc: 'Master advanced, scaled agile facilitation.' },
+  { title: 'App Developer to Blockchain Solutions Architect', category: 'Development', desc: 'Apply blockchain to real-world application design.' },
+  { title: 'Python Novice to Pythonista', category: 'Development', desc: 'Become fluent in the Python programming language.' },
+  { title: 'Web Programmer to Apprentice Programmer', category: 'Development', desc: 'Strengthen core programming fundamentals.' },
+  { title: 'Apprentice Programmer to Journeyman Developer', category: 'Development', desc: 'Hone professional software craftsmanship.' },
+  { title: 'Journeyman Developer to Master Developer', category: 'Development', desc: 'Reach mastery in software engineering.' },
   // ---- Leadership Development ----
   { title: 'Leadership Development Core', category: 'Leadership Development', desc: 'Build core leadership and people skills.' },
   { title: 'Virtual Work in the New Normal', category: 'Leadership Development', desc: 'Lead productive, remote-first teams.' },
@@ -58,10 +67,45 @@ const RAW_PATHS = [
   { title: 'Mid-level Leader Journey', category: 'Leadership Development', desc: 'Scale your impact as a growing leader.' },
   { title: 'Leader of Leaders Journey', category: 'Leadership Development', desc: 'Lead other leaders across the organization.' },
   { title: 'Digital Mindset: Digital Visionary Mindset Journey', category: 'Leadership Development', desc: 'Drive digital transformation with clear vision.' },
-  { title: 'Innovation Mindset Journey', category: 'Leadership Development', desc: 'Cultivate creative, innovative team cultures.' }
+  { title: 'Innovation Mindset Journey', category: 'Leadership Development' },
+  // ---- Skillsoft mapped content (Content-Mapping workbook, Part B tracks 1-27) ----
+  { title: 'AI for Data Analytics and BI', category: 'Data & Analytics' },
+  { title: 'AI for Data Science', category: 'AI' },
+  { title: 'AI for DevOps', category: 'DevOps & Cloud' },
+  { title: 'AI for Programmers', category: 'Development' },
+  { title: 'AI for Software Engineers', category: 'Development' },
+  { title: 'Machine Learning', category: 'AI' },
+  { title: 'Build Chatbot with Python', category: 'Development' },
+  { title: 'Python', category: 'Development' },
+  { title: 'Data Analysis with R', category: 'Data & Analytics' },
+  { title: 'Data Analytics Specialist', category: 'Data & Analytics' },
+  { title: 'Generative AI', category: 'AI' },
+  { title: 'Mastering Power BI', category: 'Data & Analytics' },
+  { title: 'Machine Learning Operations', category: 'AI' },
+  { title: 'NLP and LLMs', category: 'AI' },
+  { title: 'No/Low Code Machine Learning', category: 'AI' },
+  { title: 'Predictive Analytics', category: 'Data & Analytics' },
+  { title: 'Prompt Engineering for Developers', category: 'AI' },
+  { title: 'Automated Testing', category: 'Development' },
+  { title: 'CyberSecurity', category: 'Cybersecurity' },
+  { title: 'VR/AR and Game Development', category: 'Development' },
+  { title: 'DevOps', category: 'DevOps & Cloud' },
+  { title: 'AI Architect', category: 'AI' },
+  { title: 'The Generative AI Cloud Odyssey', category: 'DevOps & Cloud' },
+  { title: 'Design Thinking', category: 'Design & Innovation' },
+  { title: 'Business Skills', category: 'Business & Finance' },
+  { title: 'Banking and Finance', category: 'Business & Finance' },
+  { title: 'FinTech', category: 'Business & Finance' },
 ]
 
-const PATHS = RAW_PATHS.map((p, i) => ({ ...p, image: COURSE_IMAGES[i % COURSE_IMAGES.length] }))
+const PATHS = RAW_PATHS.map((p, i) => {
+  const slug = catalogSlugByTitle.get(p.title.toLowerCase())
+  return {
+    ...p,
+    href: slug ? `/skillsoft-catalog#${slug}` : '/skillsoft-catalog',
+    image: COURSE_IMAGES[i % COURSE_IMAGES.length]
+  }
+})
 
 const INITIAL_VISIBLE = 8
 
@@ -151,8 +195,9 @@ export default function AspireJourneys() {
             <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
               {shown.map((p, i) => (
                 <Reveal key={p.title} delay={(i % 4) * 70} className="h-full">
-                  <article
-                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal/60 hover:shadow-lg"
+                  <Link
+                    to={p.href}
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal/60 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
                   >
                     <div className="overflow-hidden aspect-[16/9] bg-soft">
                       <img
@@ -168,7 +213,7 @@ export default function AspireJourneys() {
                       </span>
                       <h3 className="font-heading text-sm sm:text-base font-bold leading-snug text-navy">{p.title}</h3>
                     </div>
-                  </article>
+                  </Link>
                 </Reveal>
               ))}
             </div>

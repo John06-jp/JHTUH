@@ -15,71 +15,71 @@ export const LEARNING_AREAS = [
     tag: 'Technology',
     label: 'Technology & Development',
     Icon: TechnologyIcon,
-    href: '/program?p=it',
+    href: '/skillsoft-catalog#python',
     desc: 'Build modern technical skills across software, web, and application development.',
-    topics: ['Software Development', 'Web Development', 'Programming', 'Application Development']
+    topics: ['Python', 'Build Chatbot with Python', 'AI for Programmers', 'AI for Software Engineers']
   },
   {
     key: 'data',
     tag: 'Data',
     label: 'Data & Analytics',
     Icon: DataIcon,
-    href: '/program?p=ds',
+    href: '/skillsoft-catalog#data-analytics-specialist',
     desc: 'Turn raw information into insight with analytics, visualisation, and data science.',
-    topics: ['Data Science', 'Data Analysis with R', 'Machine Learning', 'Mastering Power BI', 'Data Storytelling']
+    topics: ['Data Analytics Specialist', 'Data Analysis with R', 'Machine Learning', 'Mastering Power BI', 'Predictive Analytics']
   },
   {
     key: 'security',
     tag: 'Security',
     label: 'Cybersecurity',
     Icon: SecurityIcon,
-    href: '/program?p=cs',
+    href: '/skillsoft-catalog#cybersecurity',
     desc: 'Protect systems, data, and networks with industry-recognised security skills.',
-    topics: ['Ethical Hacking', 'Cyber Security', 'Cloud Security', 'Security+ Prep']
+    topics: ['CyberSecurity', 'Network Security', 'Ethical Hacking', 'Risk Management']
   },
   {
     key: 'cloud',
     tag: 'Cloud',
     label: 'Cloud Computing',
     Icon: CloudIcon,
-    href: '/program?p=aiml',
+    href: '/skillsoft-catalog#genai-cloud-odyssey',
     desc: 'Design, deploy, and manage modern cloud infrastructure and services.',
-    topics: ['Cloud Computing', 'AWS', 'Azure', 'Cloud Security']
+    topics: ['The Generative AI Cloud Odyssey', 'DevOps', 'Cloud Platforms', 'AI on AWS, Azure & GCP']
   },
   {
     key: 'leadership',
     tag: 'Leadership',
     label: 'Leadership & Management',
     Icon: LeadershipIcon,
-    href: '/cse-courses',
+    href: '/skillsoft-catalog#business-skills',
     desc: 'Grow your people and process skills to lead teams and projects effectively.',
-    topics: ['Project Management', 'Business Skills', 'Leadership', 'Communication']
+    topics: ['Business Skills', 'Design Thinking', 'Communication', 'Time Management']
   },
   {
     key: 'business',
     tag: 'Business',
     label: 'Business Skills',
     Icon: BusinessIcon,
-    href: '/cse-courses',
+    href: '/skillsoft-catalog#business-skills',
     desc: 'Develop the professional, analytical, and communication skills workplaces need.',
-    topics: ['Business Skills', 'Data Storytelling', 'Professional Development', 'Communication']
+    topics: ['Business Skills', 'Banking and Finance', 'FinTech', 'Communication']
   },
   {
     key: 'devops',
     tag: 'DevOps',
     label: 'IT Operations & DevOps',
     Icon: DevOpsIcon,
-    href: '/program?p=ds',
+    href: '/skillsoft-catalog#devops',
     desc: 'Automate, deploy, and operate reliable infrastructure and delivery pipelines.',
-    topics: ['DevOps', 'Operating Systems', 'Computer Networking', 'Automation']
+    topics: ['DevOps', 'AI for DevOps', 'Machine Learning Operations', 'Automated Testing']
   },
   {
     key: 'ai',
     tag: 'AI',
     label: 'AI & Emerging Technologies',
     Icon: AIIcon,
-    href: '/program?p=aiml',
+    href: '/skillsoft-catalog#generative-ai',
     desc: 'Explore artificial intelligence, machine learning, and emerging technologies.',
-    topics: ['Artificial Intelligence', 'Machine Learning', 'Generative AI', 'NLP & LLMs', 'Deep Learning']
+    topics: ['Generative AI', 'Machine Learning', 'NLP and LLMs', 'Prompt Engineering for Developers', 'AI Architect']
   }
 ]
