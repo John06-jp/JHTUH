@@ -1,3 +1,5 @@
+import Reveal from './Reveal'
+
 const FEATURES = [
   {
     title: 'Global Leader',
@@ -28,26 +30,34 @@ const FEATURES = [
 
 export default function TrustBar() {
   return (
-    <section className="bg-soft" aria-label="Key highlights of Skillsoft partnership">
-      <div className="max-w-[1200px] mx-auto px-6 sm:px-8 pb-14 lg:pb-16">
-        {/* One unified horizontal strip — 5 equal cells with hairline separators */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 divide-y sm:divide-y-0 sm:divide-x lg:divide-y-0 divide-line/60 bg-white border border-line/70 rounded-2xl shadow-[0_20px_50px_-30px_rgba(7,23,53,0.25)] overflow-hidden">
-          {FEATURES.map((f) => (
-            <div key={f.title} className="px-6 py-9 flex flex-col items-center text-center gap-4">
-              <span
-                className="w-14 h-14 rounded-full bg-navy/[0.05] text-navy grid place-items-center [&_svg]:w-6 [&_svg]:h-6"
-                aria-hidden="true"
+    <section className="bg-white" aria-label="Key highlights of Skillsoft partnership">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+        {/* One unified feature/statistics strip — 5 equal cells */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-5 lg:gap-0 lg:divide-x lg:divide-line/60 bg-white border border-line/70 rounded-2xl shadow-[0_20px_50px_-30px_rgba(7,23,53,0.25)] overflow-hidden">
+          {FEATURES.map((f, i) => {
+            const isLast = i === FEATURES.length - 1
+            return (
+              <Reveal
+                as="article"
+                key={f.title}
+                delay={i * 80}
+                className={`flex flex-col items-center text-center gap-3.5 rounded-2xl bg-soft lg:bg-transparent px-4 py-6 sm:px-5 lg:px-6 lg:py-9 lg:rounded-none ${isLast ? 'col-span-2 lg:col-auto' : ''}`}
               >
-                <svg viewBox="0 0 24 24">
-                  <path d={f.icon} stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                </svg>
-              </span>
-              <div>
-                <h3 className="font-heading font-bold text-navy tracking-tight">{f.title}</h3>
-                <p className="text-sm text-muted leading-relaxed mt-1.5">{f.text}</p>
-              </div>
-            </div>
-          ))}
+                <span
+                  className="grid h-14 w-14 place-items-center rounded-full bg-navy/[0.05] text-teal [&_svg]:h-7 [&_svg]:w-7 lg:[&_svg]:h-8 lg:[&_svg]:w-8"
+                  aria-hidden="true"
+                >
+                  <svg viewBox="0 0 24 24">
+                    <path d={f.icon} stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                  </svg>
+                </span>
+                <div>
+                  <h3 className="font-heading font-bold text-navy tracking-tight text-base">{f.title}</h3>
+                  <p className="text-sm text-muted leading-relaxed mt-1.5">{f.text}</p>
+                </div>
+              </Reveal>
+            )
+          })}
         </div>
       </div>
     </section>

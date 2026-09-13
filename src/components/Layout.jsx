@@ -3,6 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 import Modals from './Modals'
 import Toasts from './Toasts'
+import ScrollTop from './ScrollTop'
 import useScrollToHash from '../hooks/useScrollToHash'
 
 export default function Layout() {
@@ -14,6 +15,7 @@ export default function Layout() {
       <Footer />
       <Modals />
       <Toasts />
+      <ScrollTop />
     </>
   )
 }

@@ -25,15 +25,17 @@ export default function LearningAreas() {
   const cat = LEARNING_AREAS.find((c) => c.key === selected) || LEARNING_AREAS[0]
 
   return (
-    <section className="bg-soft border-y border-line py-16 lg:py-20" aria-labelledby="learning-heading">
+    <section className="bg-soft border-y border-line py-12 sm:py-16 lg:py-20" aria-labelledby="learning-heading">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
         <p className="mb-2 text-teal font-extrabold uppercase tracking-widest text-xs">Programs</p>
-        <h2 id="learning-heading" className="font-heading text-navy font-bold tracking-tight text-3xl md:text-4xl mb-3">Learn Across In-Demand Areas</h2>
+        <h2 id="learning-heading" className="font-heading text-navy font-bold tracking-tight text-2xl sm:text-3xl md:text-4xl mb-3">
+          Learn Across In-Demand Areas
+        </h2>
         <p className="mx-auto max-w-2xl text-muted">Explore skills across technology, business, leadership, and emerging fields.</p>
       </div>
 
       {/* Continuous logo loop (full bleed) */}
-      <div className="marquee mt-10 overflow-hidden" aria-label="Learning areas">
+      <div className="marquee mt-8 overflow-hidden" aria-label="Learning areas">
         <div className="marquee-track flex w-max gap-4 sm:gap-5">
           <div className="flex gap-4 pr-4 sm:gap-5 sm:pr-5">
             {LEARNING_AREAS.map((c) => (

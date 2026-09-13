@@ -1,5 +1,6 @@
 import StatCounter from './StatCounter'
 import Testimonial from './Testimonial'
+import Reveal from './Reveal'
 
 const AUDIENCE = [
   { title: 'Students', text: 'Build industry-relevant skills and earn certifications.', icon: 'M22 10v6M2 10l10-5 10 5-10 5zM6 12v5c3 3 9 3 12 0v-5' },
@@ -17,24 +18,34 @@ const STATS = [
 
 export default function AudienceImpact() {
   return (
-    <section className="bg-white border-t border-line" aria-label="Audience benefits and partner impact">
-      <div className="max-w-[1200px] mx-auto px-6 py-14 grid gap-10 lg:grid-cols-2 items-start">
+    <section className="bg-soft border-t border-line" aria-label="Audience benefits and partner impact">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 grid gap-10 lg:grid-cols-2 items-start">
         <div id="audience">
-          <p className="text-teal font-extrabold tracking-widest uppercase text-xs mb-2">Audience</p>
-          <h2 className="font-heading font-bold text-navy tracking-tight text-3xl md:text-4xl mb-3">Who Can Benefit?</h2>
+          <p className="text-teal font-extrabold tracking-widest uppercase text-xs mb-3">Audience</p>
+          <h2 className="font-heading font-bold text-navy tracking-tight text-2xl sm:text-3xl md:text-4xl mb-3">
+            Who Can Benefit?
+          </h2>
+          <p className="text-muted mb-6 max-w-lg">
+            Skillsoft learning is designed for everyone across the academic and professional journey.
+          </p>
           <div className="grid gap-4 sm:grid-cols-2">
-            {AUDIENCE.map((a) => (
-              <article key={a.title} className="bg-soft border border-line rounded-2xl p-5 flex gap-3.5">
-                <div className="w-11 h-11 shrink-0 rounded-xl bg-teal-bg text-teal grid place-items-center [&_svg]:w-6 [&_svg]:h-6" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d={a.icon} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-heading font-bold text-navy">{a.title}</h3>
-                  <p className="text-sm text-muted">{a.text}</p>
-                </div>
-              </article>
+            {AUDIENCE.map((a, i) => (
+              <Reveal key={a.title} delay={i * 80} className="h-full">
+                <article className="group bg-white border border-line rounded-2xl p-5 sm:p-6 flex gap-4 h-full transition-all duration-300 hover:-translate-y-1 hover:border-teal/40 hover:shadow-md">
+                  <div
+                    className="w-12 h-12 shrink-0 rounded-xl bg-teal-bg text-teal grid place-items-center transition-transform duration-200 group-hover:scale-105 [&_svg]:w-6 [&_svg]:h-6"
+                    aria-hidden="true"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <path d={a.icon} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-heading font-bold text-navy text-lg">{a.title}</h3>
+                    <p className="text-sm text-muted leading-relaxed mt-1">{a.text}</p>
+                  </div>
+                </article>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -42,7 +53,7 @@ export default function AudienceImpact() {
         <div id="impact">
           <div className="bg-navy text-white rounded-2xl p-7 md:p-8 shadow-xl">
             <h2 className="font-heading text-white text-xl md:text-2xl font-bold">Our Impact Together</h2>
-            <div className="grid grid-cols-2 gap-4 mt-5">
+            <div className="grid grid-cols-2 gap-4 mt-6">
               {STATS.map((s) => (
                 <StatCounter key={s.label} target={s.target} label={s.label} />
               ))}

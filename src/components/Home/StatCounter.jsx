@@ -39,9 +39,9 @@ export default function StatCounter({ target, suffix = '+', label }) {
   const display = target >= 1000 ? `${(value / 1000).toFixed(0)}K+` : `${Math.floor(value)}${suffix}`
 
   return (
-    <div ref={ref} className="bg-white/5 border border-white/10 rounded-xl p-4 text-center">
-      <span className="stat-number font-heading font-extrabold text-2xl text-teal-light block">{display}</span>
-      <span className="text-xs text-slate-300">{label}</span>
+    <div ref={ref} className="bg-white/5 border border-white/10 rounded-xl p-4 sm:p-5 text-center">
+      <span className="stat-number font-heading font-extrabold text-3xl md:text-4xl text-teal-light block tracking-tight">{display}</span>
+      <span className="mt-1 block text-xs sm:text-sm text-slate-300 leading-snug">{label}</span>
     </div>
   )
 }

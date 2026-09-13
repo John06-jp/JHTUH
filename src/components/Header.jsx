@@ -116,7 +116,7 @@ function MobileNav({ open, openModal }) {
             <a
               key={l.label}
               href={l.href}
-              className="rounded-lg px-3 py-3 text-base font-semibold text-ink transition-colors hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+              className="flex min-h-[44px] items-center rounded-lg px-3 text-base font-semibold text-ink transition-colors hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
             >
               {l.label}
             </a>
@@ -148,7 +148,7 @@ function HomeHeader() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-line bg-white shadow-[0_1px_3px_rgba(7,23,53,0.04)]">
+    <header className="sticky top-0 z-50 w-full border-b border-line bg-white/90 backdrop-blur-md shadow-[0_1px_3px_rgba(7,23,53,0.04)]">
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center gap-3 sm:gap-4 md:h-[72px] lg:h-20 lg:gap-6">
           {/* Brand / logo */}
@@ -164,7 +164,7 @@ function HomeHeader() {
           </a>
 
           {/* Desktop navigation */}
-          <nav className="ml-2 hidden items-center xl:flex 2xl:ml-6" id="site-nav" aria-label="Main navigation">
+          <nav className="ml-2 hidden items-center gap-1 xl:flex 2xl:ml-6" id="site-nav" aria-label="Main navigation">
             <NavDropdown label="Learn" items={LEARN_ITEMS} />
             <TopLink href="#certifications">Certifications</TopLink>
             <TopLink href="#audience">For Institutions</TopLink>
@@ -177,7 +177,7 @@ function HomeHeader() {
           <div className="ml-auto hidden shrink-0 items-center gap-2.5 xl:flex">
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-navy transition-colors hover:border-teal hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-navy transition-all duration-200 hover:border-teal hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
               onClick={() => openModal('search')}
               aria-label="Open search dialog"
             >
@@ -188,14 +188,14 @@ function HomeHeader() {
             <button
               type="button"
               onClick={() => openModal('login')}
-              className="inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg border border-teal bg-white px-4 text-sm font-semibold text-teal transition-colors hover:bg-teal/[0.08] sm:px-5"
+              className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-lg border border-teal bg-white px-4 text-sm font-semibold text-teal transition-all duration-200 hover:bg-teal/[0.08] active:scale-[0.98] sm:px-5"
             >
               Student Login
             </button>
             <button
               type="button"
               onClick={() => openModal('register')}
-              className="inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-teal px-4 text-sm font-semibold text-white transition-colors hover:bg-teal-dark sm:px-5"
+              className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-lg bg-teal px-4 text-sm font-semibold text-white transition-all duration-200 hover:bg-teal-dark hover:brightness-105 active:scale-[0.98] sm:px-5"
             >
               Register
             </button>
@@ -206,7 +206,7 @@ function HomeHeader() {
             <button
               type="button"
               onClick={() => openModal('login')}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-line text-navy transition-colors hover:border-teal hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-navy transition-colors hover:border-teal hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
               aria-label="Student login"
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
