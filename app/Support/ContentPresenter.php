@@ -62,7 +62,22 @@ class ContentPresenter
      */
     public static function tracks(): array
     {
-        return SkillsoftTrack::query()
+        return self::presentTracks(SkillsoftTrack::query());
+    }
+
+    /**
+     * Core Skillsoft courses shown on the landing page.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public static function coreTracks(): array
+    {
+        return self::presentTracks(SkillsoftTrack::query()->where('catalog_group', 'core'));
+    }
+
+    private static function presentTracks($query): array
+    {
+        return $query
             ->with('outcomes')
             ->orderBy('sort')
             ->get()
@@ -106,7 +121,22 @@ class ContentPresenter
      */
     public static function journeys(): array
     {
-        return AspireJourney::query()
+        return self::presentJourneys(AspireJourney::query());
+    }
+
+    /**
+     * Requested Aspire journeys shown on the landing page.
+     *
+     * @return array<int, array<string, mixed>>
+     */
+    public static function aspireJourneys(): array
+    {
+        return self::presentJourneys(AspireJourney::query()->where('journey_group', 'aspire'));
+    }
+
+    private static function presentJourneys($query): array
+    {
+        return $query
             ->with('track')
             ->orderBy('sort')
             ->get()

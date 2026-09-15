@@ -5,14 +5,16 @@ import LearningAreas from '../components/Home/LearningAreas'
 import AudienceImpact from '../components/Home/AudienceImpact'
 import CtaBanner from '../components/Home/CtaBanner'
 import AspireJourneys from '../components/AspireJourneys'
+import CoreSkillsoftCourses from '../components/Home/CoreSkillsoftCourses'
 
-export default function Home({ journeys = [] }) {
+export default function Home({ coreTracks = [], journeys = [] }) {
   return (
     <main>
       <Hero />
       <TrustBar />
       <About />
       <LearningAreas />
+      <CoreSkillsoftCourses tracks={coreTracks} />
       <AspireJourneys journeys={journeys} />
       <AudienceImpact />
       <CtaBanner />

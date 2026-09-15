@@ -11,7 +11,8 @@ class HomeController extends Controller
     public function __invoke(): Response
     {
         return Inertia::render('pages/Home', [
-            'journeys' => ContentPresenter::journeys(),
+            'coreTracks' => ContentPresenter::coreTracks(),
+            'journeys' => ContentPresenter::aspireJourneys(),
         ]);
     }
 }

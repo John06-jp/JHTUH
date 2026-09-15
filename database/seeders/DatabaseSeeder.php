@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         // Skillsoft partner content (programs, catalog tracks, journeys, domains).
         $this->call(ContentSeeder::class);
+        $this->call(RequestedCatalogSeeder::class);
 
         // Demo learner account so the login flow can be tried immediately.
         User::query()->updateOrCreate(

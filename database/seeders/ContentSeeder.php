@@ -81,6 +81,7 @@ class ContentSeeder extends Seeder
                 [
                     'title' => $row['title'],
                     'category' => $row['category'],
+                    'catalog_group' => 'legacy',
                     'duration' => $row['duration'],
                     'page_url' => $row['page_url'],
                     'apply_url' => $row['apply_url'],
@@ -107,6 +108,7 @@ class ContentSeeder extends Seeder
                 ['title' => $row['title'], 'category' => $row['category']],
                 [
                     'description' => $row['description'],
+                    'journey_group' => 'legacy',
                     'image' => $row['image'],
                     'track_id' => $row['track_slug'] ? $trackIds[$row['track_slug']] ?? null : null,
                     'sort' => $row['sort'],

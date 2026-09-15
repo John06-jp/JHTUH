@@ -14,6 +14,7 @@ class SkillsoftTrack extends Model
         'slug',
         'title',
         'category',
+        'catalog_group',
         'duration',
         'page_url',
         'apply_url',
