@@ -6,8 +6,10 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -40,6 +42,23 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::updateUserPasswordsUsing(UpdateUserPassword::class);
         Fortify::resetUserPasswordsUsing(ResetUserPassword::class);
         Fortify::redirectUserForTwoFactorAuthenticationUsing(RedirectIfTwoFactorAuthenticatable::class);
+
+        // Administrative login only: while the learner area is admin-only, the
+        // login pipeline accepts accounts whose role is exactly 'admin'. Any
+        // other credential combination fails the same way as a wrong password.
+        Fortify::authenticateUsing(function (Request $request): ?User {
+            $credentials = $request->only(Fortify::username(), 'password');
+
+            $user = User::query()
+                ->where(Fortify::username(), $credentials[Fortify::username()])
+                ->first();
+
+            if (! $user || ! Hash::check($credentials['password'], $user->password)) {
+                return null;
+            }
+
+            return $user->role === 'admin' ? $user : null;
+        });
 
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());

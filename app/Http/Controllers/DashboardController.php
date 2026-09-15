@@ -10,27 +10,40 @@ use Inertia\Response;
 class DashboardController extends Controller
 {
     /**
-     * Learner dashboard shown after "Student Login".
+     * Admin dashboard behind "Admin Login": lists every course inquiry with
+     * the marketing/contact details collected by the public apply form.
      */
     public function __invoke(Request $request): Response
     {
-        $user = $request->user();
+        abort_unless($request->user()->role === 'admin', 403);
+
+        $applications = Application::query()->with('program')->latest()->get();
 
         return Inertia::render('pages/Dashboard', [
-            'applications' => Application::query()
-                ->where(function ($query) use ($user) {
-                    $query->where('user_id', $user->id)->orWhere('email', $user->email);
-                })
-                ->latest()
-                ->limit(20)
-                ->get(['id', 'course_title', 'status', 'created_at'])
+            'inquiries' => $applications
                 ->map(fn (Application $application) => [
                     'id' => $application->id,
+                    'name' => $application->name,
+                    'first_name' => $application->first_name,
+                    'last_name' => $application->last_name,
+                    'email' => $application->email,
+                    'mobile_number' => $application->mobile_number,
+                    'institution_name' => $application->institution_name,
+                    'address' => $application->address,
+                    'roll_no' => $application->roll_no,
+                    'year_of_study' => $application->year_of_study,
                     'course_title' => $application->course_title,
+                    'program' => $application->program?->name,
+                    'source_page' => $application->source_page,
                     'status' => $application->status,
                     'submitted_at' => $application->created_at?->toFormattedDateString(),
                 ])
                 ->all(),
+            'stats' => [
+                'total' => Application::query()->count(),
+                'submitted' => Application::query()->where('status', 'submitted')->count(),
+                'new_today' => Application::query()->whereDate('created_at', today())->count(),
+            ],
         ]);
     }
 }

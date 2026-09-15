@@ -8,7 +8,7 @@ import { LoginForm } from '../../components/AuthForms'
 export default function Login() {
   return (
     <main className="bg-soft">
-      <Head title="Student Login" />
+      <Head title="Admin Login" />
       <div className="mx-auto flex min-h-[60vh] w-full max-w-[560px] flex-col justify-center px-4 py-12 sm:px-6">
         <div className="rounded-2xl border border-line bg-white p-6 shadow-xl sm:p-8">
           <LoginForm />

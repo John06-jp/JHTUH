@@ -36,10 +36,10 @@ export function LoginForm({ onDone }) {
 
   return (
     <>
-      <h2 className="font-heading font-bold text-navy text-lg">Student Login</h2>
+      <h2 className="font-heading font-bold text-navy text-lg">Admin Login</h2>
       <form className="grid gap-3.5 mt-4" onSubmit={submit}>
-        <p className="text-sm text-muted">Access your Skillsoft courses through Area 51's portal.</p>
-        <Field label="Student Roll No. or Email" htmlFor="login-email">
+        <p className="text-sm text-muted">Sign in with your Area 51 admin account to manage course inquiries.</p>
+        <Field label="Email" htmlFor="login-email">
           <input
             className="input"
             id="login-email"
@@ -82,7 +82,7 @@ export function LoginForm({ onDone }) {
           className="w-full px-5 py-3 rounded-xl text-sm font-bold bg-teal text-white hover:bg-teal-dark disabled:opacity-70"
           disabled={form.processing}
         >
-          {form.processing ? 'Signing in…' : 'Login to Student Dashboard'}
+          {form.processing ? 'Signing in…' : 'Login to Admin Dashboard'}
         </button>
       </form>
     </>

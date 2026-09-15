@@ -27,5 +27,16 @@ class DatabaseSeeder extends Seeder
                 'student_roll_no' => 'A51-DEMO-001',
             ]
         );
+
+        // Demo admin account. Login is admin-only for now, so this is the only
+        // account that can sign in and reach the /dashboard admin interface.
+        User::query()->updateOrCreate(
+            ['email' => 'admin@area51.ph'],
+            [
+                'name' => 'Area 51 Admin',
+                'password' => 'password',
+                'role' => 'admin',
+            ]
+        );
     }
 }

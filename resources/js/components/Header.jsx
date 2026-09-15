@@ -141,7 +141,7 @@ function MobileNav({ open, openModal }) {
             onClick={() => openModal('login')}
             className="h-11 w-full rounded-lg border border-teal bg-white px-4 text-sm font-bold text-teal transition-colors hover:bg-teal/[0.08]"
           >
-            Student Login
+            Admin Login
           </button>
           <button
             type="button"
@@ -271,7 +271,7 @@ function HomeHeader() {
               onClick={() => openModal('login')}
               className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-lg border border-teal bg-white px-4 text-sm font-semibold text-teal transition-all duration-200 hover:bg-teal/[0.08] active:scale-[0.98] sm:px-5"
             >
-              Student Login
+              Admin Login
             </button>
             <button
               type="button"
@@ -288,7 +288,7 @@ function HomeHeader() {
               type="button"
               onClick={() => openModal('login')}
               className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-navy transition-colors hover:border-teal hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
-              aria-label="Student login"
+              aria-label="Admin login"
             >
               <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
                 <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" fill="none" />

@@ -117,44 +117,74 @@ class ContentPagesTest extends TestCase
         $this->get('/dashboard')->assertRedirect('/login');
     }
 
-    public function test_authenticated_learner_sees_their_applications(): void
+    public function test_authenticated_admin_sees_all_inquiries(): void
     {
-        $user = User::factory()->create([
-            'email' => 'learner@area51.ph',
-            'role' => 'student',
+        $admin = User::factory()->create([
+            'email' => 'admin@area51.ph',
+            'role' => 'admin',
         ]);
 
+        $learner = User::factory()->create(['email' => 'learner@area51.ph']);
+
         Application::create([
-            'user_id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
+            'user_id' => $learner->id,
+            'name' => $learner->name,
+            'email' => $learner->email,
             'course_title' => 'DevOps',
             'status' => 'submitted',
         ]);
 
-        $this->actingAs($user)
+        $this->actingAs($admin)
             ->get('/dashboard')
             ->assertOk()
             ->assertInertia(fn (Assert $page) => $page
                 ->component('pages/Dashboard')
-                ->has('applications', 1)
-                ->where('applications.0.course_title', 'DevOps')
+                ->has('inquiries', 1)
+                ->where('inquiries.0.course_title', 'DevOps')
+                ->where('stats.total', 1)
+                ->where('stats.submitted', 1)
             );
     }
 
-    public function test_learner_can_log_in_and_is_sent_to_the_dashboard(): void
+    public function test_dashboard_is_forbidden_for_non_admin_users(): void
     {
-        $user = User::factory()->create([
-            'email' => 'learner@area51.ph',
+        $student = User::factory()->create(['role' => 'student']);
+
+        $this->actingAs($student)
+            ->get('/dashboard')
+            ->assertForbidden();
+    }
+
+    public function test_admin_can_log_in_and_is_sent_to_the_dashboard(): void
+    {
+        $admin = User::factory()->create([
+            'email' => 'admin@area51.ph',
             'password' => 'password',
+            'role' => 'admin',
         ]);
 
         $this->post('/login', [
-            'email' => 'learner@area51.ph',
+            'email' => 'admin@area51.ph',
             'password' => 'password',
         ])->assertRedirect('/dashboard');
 
-        $this->assertAuthenticatedAs($user);
+        $this->assertAuthenticatedAs($admin);
+    }
+
+    public function test_non_admin_users_cannot_log_in(): void
+    {
+        User::factory()->create([
+            'email' => 'student@area51.ph',
+            'password' => 'password',
+            'role' => 'student',
+        ]);
+
+        $this->post('/login', [
+            'email' => 'student@area51.ph',
+            'password' => 'password',
+        ])->assertSessionHasErrors('email');
+
+        $this->assertGuest();
     }
 
     public function test_registration_creates_a_learner_with_a_role(): void

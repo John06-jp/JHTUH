@@ -77,6 +77,22 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Completion Redirects
+    |--------------------------------------------------------------------------
+    |
+    | Where each feature should send the user after it succeeds. Login keeps
+    | the default 'home' (the admin dashboard), while registration returns the
+    | newly created learner to the public homepage because only admin accounts
+    | are permitted to sign in for now.
+    |
+    */
+
+    'redirects' => [
+        'register' => '/',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Fortify Routes Prefix / Subdomain
     |--------------------------------------------------------------------------
     |
