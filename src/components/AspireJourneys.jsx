@@ -165,8 +165,8 @@ export default function AspireJourneys() {
         </div>
 
         {/* Search + filters */}
-        <div className="mb-6 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between lg:gap-6">
-          <label className="relative flex-1 lg:max-w-[26rem]">
+        <div className="mb-6 flex flex-col gap-3">
+          <label className="relative block w-full">
             <span className="sr-only">Search learning paths</span>
             <svg viewBox="0 0 24 24" className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-muted" aria-hidden="true">
               <path d="M21 21l-4.35-4.35M16.5 10.5a6 6 0 11-12 0 6 6 0 0112 0z" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
@@ -180,7 +180,7 @@ export default function AspireJourneys() {
             />
           </label>
 
-          <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar lg:flex-wrap lg:justify-end lg:overflow-visible" role="group" aria-label="Filter learning paths by category">
+          <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar lg:flex-wrap" role="group" aria-label="Filter learning paths by category">
             {CATEGORIES.map((c) => (
               <FilterChip key={c} active={activeCat === c} onClick={() => selectCat(c)}>
                 {c}
