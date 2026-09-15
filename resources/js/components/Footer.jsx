@@ -179,5 +179,8 @@ function SubFooter() {
 export default function Footer() {
   const { url } = usePage()
   const pathname = url.split('?')[0].split('#')[0]
-  return pathname === '/' ? <HomeFooter /> : <SubFooter />
+  // Public course landing pages (e.g. /courses/aspire/<slug>) share the same
+  // full footer as the landing page; only internal pages get the compact one.
+  const isLanding = pathname === '/' || pathname.startsWith('/courses/')
+  return isLanding ? <HomeFooter /> : <SubFooter />
 }
