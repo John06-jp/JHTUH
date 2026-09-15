@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/react'
 
 function CourseCard({ course }) {
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal/60 hover:shadow-lg">
+    <Link href={`/courses/core/${course.slug}`} className="group flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal/60 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal">
       <div className="aspect-[16/9] overflow-hidden bg-soft">
         <img
           src={course.image || '/course-images/IMG1.jpg'}
@@ -19,15 +19,12 @@ function CourseCard({ course }) {
         </div>
         <h3 className="mt-3 font-heading text-base font-bold leading-snug text-navy sm:text-lg">{course.title}</h3>
         <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted">{course.overview}</p>
-        <Link
-          href={`/skillsoft-catalog#${course.slug}`}
-          className="mt-auto inline-flex items-center gap-2 pt-5 text-sm font-bold text-teal transition-colors hover:text-teal-dark"
-        >
-          View course
+        <span className="mt-auto inline-flex items-center gap-2 pt-5 text-left text-sm font-bold text-teal transition-colors group-hover:text-teal-dark">
+          View description
           <span aria-hidden="true">-&gt;</span>
-        </Link>
+        </span>
       </div>
-    </article>
+    </Link>
   )
 }
 

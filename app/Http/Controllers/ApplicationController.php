@@ -19,8 +19,15 @@ class ApplicationController extends Controller
 
         Application::create([
             'user_id' => $request->user()?->id,
+            'first_name' => $data['first_name'] ?? null,
+            'last_name' => $data['last_name'] ?? null,
             'name' => $data['name'],
             'email' => $data['email'],
+            'institution_name' => $data['institution_name'] ?? null,
+            'address' => $data['address'] ?? null,
+            'roll_no' => $data['roll_no'] ?? null,
+            'year_of_study' => $data['year_of_study'] ?? null,
+            'mobile_number' => $data['mobile_number'] ?? null,
             'course_title' => $data['course_title'],
             'program_id' => $program?->id,
             'source_page' => $request->headers->has('referer')

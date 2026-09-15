@@ -5,6 +5,7 @@ namespace App\Support;
 use App\Models\AspireJourney;
 use App\Models\Program;
 use App\Models\SkillsoftTrack;
+use Illuminate\Support\Str;
 
 /**
  * Shapes Eloquent content into the exact payloads the React views consumed
@@ -137,13 +138,16 @@ class ContentPresenter
     private static function presentJourneys($query): array
     {
         return $query
-            ->with('track')
+            ->with(['track', 'outcomes'])
             ->orderBy('sort')
             ->get()
             ->map(fn (AspireJourney $journey) => [
                 'title' => $journey->title,
+                'slug' => Str::slug($journey->title),
                 'category' => $journey->category,
                 'desc' => $journey->description,
+                'overview' => $journey->description,
+                'outcomes' => $journey->outcomes->pluck('body')->all(),
                 'image' => $journey->image,
                 'href' => $journey->track
                     ? "/skillsoft-catalog#{$journey->track->slug}"

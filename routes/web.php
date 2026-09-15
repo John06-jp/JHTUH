@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\CourseDetailsController;
 use App\Http\Controllers\CseCoursesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -21,6 +22,8 @@ Route::get('/program', [ProgramController::class, 'show'])->name('program');
 Route::get('/cse-courses', CseCoursesController::class)->name('cse-courses');
 
 Route::get('/skillsoft-catalog', CatalogController::class)->name('skillsoft-catalog');
+
+Route::get('/courses/{type}/{slug}', CourseDetailsController::class)->name('courses.details');
 
 /*
 |--------------------------------------------------------------------------

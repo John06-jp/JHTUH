@@ -87,7 +87,7 @@ function CourseCard({ course }) {
   )
   const linkBody = (
     <span className="mt-1 inline-flex items-center gap-1.5 self-start text-sm font-bold text-teal transition-colors group-hover:text-teal-dark">
-      View Course
+      View Details &amp; Apply
       <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
         <path d="M4 12h15M5 8l9 0 -4 10" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
@@ -97,10 +97,8 @@ function CourseCard({ course }) {
   if (page) {
     return (
       <a
+        href={`/courses/core/${course.slug}`}
         id={course.slug}
-        href={page}
-        target="_blank"
-        rel="noreferrer"
         aria-label={`View ${course.title}`}
         className="group scroll-mt-24 flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-[0_12px_30px_rgba(17,24,39,0.04)] transition-all duration-200 hover:-translate-y-1 hover:border-teal hover:shadow-[0_24px_48px_rgba(0,91,92,0.14)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
       >
@@ -121,9 +119,9 @@ function CourseCard({ course }) {
         </span>
         <h3 className="font-heading text-lg font-bold leading-snug text-navy line-clamp-2">{course.title}</h3>
         <p className="text-sm text-muted">{course.duration}</p>
-        <span className="inline-flex w-fit items-center rounded-lg border border-dashed border-line bg-soft px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-muted">
-          Details coming soon
-        </span>
+        <a href={`/courses/core/${course.slug}`} className="mt-1 inline-flex w-fit items-center rounded-lg border border-teal bg-white px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-teal hover:bg-teal-bg">
+          View Details &amp; Apply
+        </a>
       </div>
     </article>
   )

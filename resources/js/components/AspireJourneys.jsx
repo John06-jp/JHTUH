@@ -109,7 +109,7 @@ export default function AspireJourneys({ journeys = [] }) {
               {shown.map((p, i) => (
                 <Reveal key={p.title} delay={(i % 4) * 70} className="h-full">
                   <Link
-                    href={p.href}
+                    href={`/courses/aspire/${p.slug}`}
                     className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-teal/60 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
                   >
                     <div className="overflow-hidden aspect-[16/9] bg-soft">
