@@ -45,7 +45,7 @@ class RequestedCatalogSeeder extends Seeder
         foreach ($sections as $section) {
             $duration = $this->field($section['body'], 'Duration');
             $track = $this->findTrack($section['title']) ?? new SkillsoftTrack(['slug' => $this->uniqueTrackSlug($section['title'])]);
-            $image = '/course-images/IMG'.$section['number'].'.jpg';
+            $image = '/course-images/'.$this->courseImageName($section['title']).'.jpg';
             $track->fill(
                 [
                     'title' => $section['title'],
@@ -116,6 +116,17 @@ class RequestedCatalogSeeder extends Seeder
             Str::contains($title, ['Data', 'Power BI', ' R']) => 'Data & Analytics',
             default => 'Development',
         };
+    }
+
+    private function courseImageName(string $title): string
+    {
+        $aliases = [
+            'C++ Programming' => 'c-plus-plus-programming',
+            'Customer Service: Core Concepts & Methods' => 'customer-servicecore-concepts-methods',
+            'Offensive Security / Ethical Hacking' => 'offensive-securityethical-hacking',
+        ];
+
+        return $aliases[$title] ?? Str::slug($title);
     }
 
     private function findTrack(string $title): ?SkillsoftTrack
