@@ -12,6 +12,16 @@ const FEATURED_BENEFITS = [
     text: 'Available anytime, anywhere — video, audio, books, labs and practice tests.'
   }
 ]
+const KEY_STRENGTHS = [
+  'Extensive course library covering technology, business, leadership, cybersecurity, data, AI, cloud, software development and more.',
+  'Industry-aligned learning designed around practical, workplace-relevant skills.',
+  'AI and Generative AI learning including AI fundamentals, prompt engineering, data analytics, programming and responsible AI.',
+  'Percipio learning platform providing personalized learning paths, assessments and skill development.',
+  'Aspire Journeys for structured, role-based career and skill development.',
+  'Skill Benchmarking to assess current capabilities and identify skill gaps.',
+  'Certifications and learning pathways that can support employability and professional development.',
+  'Institution integration can support curriculum enrichment, credit-linked learning, employability programs and industry-oriented skill development.'
+]
 
 export default function About() {
   return (
@@ -25,10 +35,28 @@ export default function About() {
           </h2>
           <div className="grid gap-4 text-muted leading-relaxed max-w-prose mb-6">
             <p>
-              Skillsoft is a leading global provider of digital learning, offering a comprehensive portfolio of learning content, skills assessments and performance support resources. With a legacy of more than 25 years, Skillsoft empowers learners and organizations to build essential skills, drive performance and achieve business outcomes.
+              Skillsoft is a global digital learning and workforce development company that helps organizations and universities build job-ready skills through technology-enabled learning.
             </p>
+            <div>
+              <p className="font-semibold text-navy mb-3">Key strengths:</p>
+              <ul className="grid gap-3 text-[0.95rem]">
+                {KEY_STRENGTHS.map((s) => (
+                  <li key={s} className="flex gap-3 items-start">
+                    <span
+                      className="mt-0.5 h-5 w-5 shrink-0 rounded-full bg-teal text-white grid place-items-center text-sm font-bold"
+                      aria-hidden="true"
+                    >
+                      <svg viewBox="0 0 24 24" className="h-3 w-3">
+                        <path d="M6 12.5l4 4L18 7" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    <span className="leading-relaxed">{s}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
             <p>
-              Through our partnership, Area 51 brings Skillsoft’s premium learning library to students, faculty and professionals—helping them stay relevant, competitive and future-ready.
+              Through our partnership with Bodhika, a Skillsoft Authorized Partner, we have extended the Skillsoft-powered learning ecosystem to Area51 in the Philippines, expanding access to world-class digital learning, industry-aligned courses, and workforce skilling solutions.
             </p>
           </div>
           <a
