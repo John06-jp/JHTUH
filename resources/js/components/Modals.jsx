@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, usePage } from '@inertiajs/react'
 import { useUI } from '../context/UIContext'
-import { LoginForm, RegisterForm } from './AuthForms'
+import { RegisterForm } from './AuthForms'
 
 // Search dialog backed by the real Skillsoft catalog (source: Content-Mapping workbook).
 const POPULAR = ['Python', 'AI', 'Data', 'Cybersecurity', 'DevOps', 'Machine Learning']
@@ -114,14 +114,6 @@ function SearchModal({ onClose }) {
   )
 }
 
-function LoginModal({ onClose }) {
-  return (
-    <ModalShell width="w-[min(94vw,440px)]" onClose={onClose}>
-      <LoginForm onDone={onClose} />
-    </ModalShell>
-  )
-}
-
 function RegisterModal({ onClose }) {
   return (
     <ModalShell width="w-[min(94vw,440px)]" onClose={onClose}>
@@ -134,7 +126,6 @@ export default function Modals() {
   const { activeModal, closeModal } = useUI()
   if (!activeModal) return null
   if (activeModal === 'search') return <SearchModal onClose={closeModal} />
-  if (activeModal === 'login') return <LoginModal onClose={closeModal} />
   if (activeModal === 'register') return <RegisterModal onClose={closeModal} />
   return null
 }

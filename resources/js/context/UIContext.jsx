@@ -10,7 +10,7 @@ import {
 const UIContext = createContext(null)
 
 export function UIProvider({ children }) {
-  const [activeModal, setActiveModal] = useState(null) // 'search' | 'login' | 'register' | null
+  const [activeModal, setActiveModal] = useState(null) // 'search' | 'register' | null
   const [toasts, setToasts] = useState([])
   const idRef = useRef(0)
 

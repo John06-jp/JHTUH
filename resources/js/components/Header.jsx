@@ -101,7 +101,7 @@ const mobileLinkCls =
   'transition-colors hover:bg-soft hover:text-teal ' +
   'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal'
 
-function MobileNav({ open, openModal }) {
+function MobileNav({ open }) {
   const pages = [
     { label: 'Programs', to: '/program' },
     { label: 'Skillsoft Catalog', to: '/skillsoft-catalog' },
@@ -134,22 +134,6 @@ function MobileNav({ open, openModal }) {
               {l.label}
             </SectionLink>
           ))}
-        </div>
-        <div className="mt-2 grid gap-2.5 border-t border-line py-4 pb-6">
-          <button
-            type="button"
-            onClick={() => openModal('login')}
-            className="h-11 w-full rounded-lg border border-teal bg-white px-4 text-sm font-bold text-teal transition-colors hover:bg-teal/[0.08]"
-          >
-            Admin Login
-          </button>
-          <button
-            type="button"
-            onClick={() => openModal('register')}
-            className="h-11 w-full rounded-lg bg-teal px-4 text-sm font-bold text-white transition-colors hover:bg-teal-dark"
-          >
-            Register
-          </button>
         </div>
       </nav>
     </div>
@@ -266,34 +250,10 @@ function HomeHeader() {
                 <path d="M21 21l-4.35-4.35M16.5 10.5a6 6 0 11-12 0 6 6 0 0112 0z" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
               </svg>
             </button>
-            <button
-              type="button"
-              onClick={() => openModal('login')}
-              className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-lg border border-teal bg-white px-4 text-sm font-semibold text-teal transition-all duration-200 hover:bg-teal/[0.08] active:scale-[0.98] sm:px-5"
-            >
-              Admin Login
-            </button>
-            <button
-              type="button"
-              onClick={() => openModal('register')}
-              className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-lg bg-teal px-4 text-sm font-semibold text-white transition-all duration-200 hover:bg-teal-dark hover:brightness-105 active:scale-[0.98] sm:px-5"
-            >
-              Register
-            </button>
           </div>
 
           {/* Mobile controls */}
           <div className="ml-auto flex shrink-0 items-center gap-2 xl:hidden sm:gap-2.5">
-            <button
-              type="button"
-              onClick={() => openModal('login')}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line text-navy transition-colors hover:border-teal hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
-              aria-label="Admin login"
-            >
-              <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" fill="none" />
-              </svg>
-            </button>
             <button
               type="button"
               onClick={() => setMobileOpen((o) => !o)}
@@ -314,7 +274,7 @@ function HomeHeader() {
         </div>
       </div>
 
-      <MobileNav open={mobileOpen} openModal={openModal} />
+      <MobileNav open={mobileOpen} />
     </header>
   )
 }
