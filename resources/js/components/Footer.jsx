@@ -71,9 +71,14 @@ function HomeFooter() {
           {/* Area 51 brand — always visible */}
           <div>
             <img
+              src="/footterlogo.png"
+              alt="Area 51 logo"
+              className="w-auto max-w-[180px]"
+            />
+            <img
               src="/partnerslogo.jpg"
               alt="Area 51 partners"
-              className="w-auto max-w-[220px]"
+              className="mt-4 w-auto max-w-[220px]"
             />
           
             <div className="mt-6 flex gap-3" id="social-links">
