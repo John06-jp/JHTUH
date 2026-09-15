@@ -242,9 +242,13 @@ function HomeHeader() {
 
           {/* Desktop navigation */}
           <nav className="ml-2 hidden items-center gap-1 xl:flex 2xl:ml-6" id="site-nav" aria-label="Main navigation">
-            <NavDropdown label="Learn" items={LEARN_ITEMS} />
-            <ProgramsDropdown current={pathname} />
-            <TopLink hash="certifications">Certifications</TopLink>
+            <TopLink hash="home"> Home</TopLink>
+            <a
+              href="/#core-skillsoft-courses"
+              className="inline-flex items-center whitespace-nowrap rounded-md px-3 py-2 text-sm font-semibold text-ink transition-colors hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
+            >
+              Skillsoft Courses
+            </a>
             <TopLink hash="audience">For Institutions</TopLink>
             <TopLink hash="about">About</TopLink>
             <NavDropdown label="Support" items={SUPPORT_ITEMS} />

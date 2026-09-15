@@ -63,7 +63,7 @@ export default function Hero() {
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
             <a
-              href="#learning-areas"
+              href="#core-skillsoft-courses"
               className="inline-flex min-h-[44px] items-center gap-2 rounded-xl bg-teal px-6 py-3 font-bold text-white transition-all duration-200 hover:bg-teal-dark hover:brightness-105 active:scale-[0.98] shadow-[0_10px_30px_-8px_rgba(0,125,121,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-light"
             >
               Explore Skillsoft Courses
