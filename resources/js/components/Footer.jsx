@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, usePage } from '@inertiajs/react'
 import { useUI } from '../context/UIContext'
 
 function FooterLink({ href, children }) {
@@ -157,7 +157,7 @@ function SubFooter() {
         <div>
           <h4 style={{ marginBottom: '.6rem', color: '#fff' }}>Area 51</h4>
           <p style={{ color: '#9FB2C8', fontSize: '.9rem', maxWidth: '22rem' }}>CSE Skillsoft guide — PE-1 to PE-6 plus additional learning.</p>
-          <p style={{ marginTop: '.8rem' }}><Link to="/" style={{ color: '#36D1C4', fontWeight: 700 }}>Back to Skillsoft home</Link></p>
+          <p style={{ marginTop: '.8rem' }}><Link href="/" style={{ color: '#36D1C4', fontWeight: 700 }}>Back to Skillsoft home</Link></p>
         </div>
         <div>
           <h4 style={{ marginBottom: '.6rem', color: '#fff' }}>On this page</h4>
@@ -166,7 +166,7 @@ function SubFooter() {
             <li><a href="#featured">Featured courses</a></li>
             <li><a href="#catalog">Semester catalog</a></li>
             <li><a href="#pe3">PE-3 details</a></li>
-            <li><Link to="/skillsoft-catalog">Skillsoft Catalog</Link></li>
+            <li><Link href="/skillsoft-catalog">Skillsoft Catalog</Link></li>
           </ul>
         </div>
       </div>
@@ -180,6 +180,7 @@ function SubFooter() {
 }
 
 export default function Footer() {
-  const { pathname } = useLocation()
+  const { url } = usePage()
+  const pathname = url.split('?')[0].split('#')[0]
   return pathname === '/' ? <HomeFooter /> : <SubFooter />
 }

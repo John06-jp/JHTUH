@@ -6,14 +6,14 @@ import AudienceImpact from '../components/Home/AudienceImpact'
 import CtaBanner from '../components/Home/CtaBanner'
 import AspireJourneys from '../components/AspireJourneys'
 
-export default function Home() {
+export default function Home({ journeys = [] }) {
   return (
     <main>
       <Hero />
       <TrustBar />
       <About />
       <LearningAreas />
-      <AspireJourneys />
+      <AspireJourneys journeys={journeys} />
       <AudienceImpact />
       <CtaBanner />
     </main>

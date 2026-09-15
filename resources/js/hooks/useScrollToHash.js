@@ -1,26 +1,38 @@
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { router } from '@inertiajs/react'
 
 /**
- * On every route change, scroll to the target section if a URL hash is
- * present, otherwise scroll to the top. This reproduces the original
- * same-page anchor navigation but also works across routes.
+ * On every Inertia navigation, scroll to the target section if the URL has a
+ * hash, otherwise return to the top. This keeps the original same-page anchor
+ * behaviour, and also handles cross-page anchors such as
+ * `/skillsoft-catalog#<slug>` used by the Aspire journey cards.
  */
 export default function useScrollToHash() {
-  const { pathname, hash } = useLocation()
-
   useEffect(() => {
-    if (hash) {
+    const scroll = () => {
+      const hash = window.location.hash
+
+      if (!hash) {
+        window.scrollTo({ top: 0, behavior: 'auto' })
+        return
+      }
+
       const id = hash.replace('#', '')
-      // Wait a tick so the destination content is mounted on the new route.
+      // Wait two frames so the destination content is mounted on the new page.
       window.requestAnimationFrame(() => {
         window.requestAnimationFrame(() => {
           const el = document.getElementById(id)
           if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
         })
       })
-    } else {
-      window.scrollTo({ top: 0, behavior: 'auto' })
     }
-  }, [pathname, hash])
+
+    scroll()
+
+    const off = router.on('navigate', () => window.setTimeout(scroll, 0))
+
+    return () => {
+      if (typeof off === 'function') off()
+    }
+  }, [])
 }

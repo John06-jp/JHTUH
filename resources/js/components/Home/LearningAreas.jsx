@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from '@inertiajs/react'
 import { LEARNING_AREAS } from './learningData'
 
 function Tile({ cat, selected, onSelect, decorative }) {
@@ -75,7 +75,7 @@ export default function LearningAreas() {
             </div>
           </div>
           <div className="shrink-0">
-            <Link to={cat.href} className="inline-flex items-center gap-2 whitespace-nowrap rounded-lg bg-teal px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-dark">
+            <Link href={cat.href} className="inline-flex items-center gap-2 whitespace-nowrap rounded-lg bg-teal px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-teal-dark">
               Explore Courses
               <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true">
                 <path d="M5 12h14M13 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />

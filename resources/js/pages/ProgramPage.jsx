@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
-import { PROGRAMS } from '../data/programsData'
+import { Link, useForm } from '@inertiajs/react'
 import SectionLink from '../components/SectionLink'
 import { useUI } from '../context/UIContext'
 
@@ -84,35 +83,66 @@ export function FeaturedGrid({ P }) {
   )
 }
 
-function ApplyModal({ course, onClose }) {
-  const { showToast } = useUI()
+function ApplyModal({ course, programKey, onClose }) {
+  const { data, setData, post, processing, errors, reset } = useForm({
+    name: '',
+    email: '',
+    course_title: course,
+    program_key: programKey
+  })
+
+  const submit = (event) => {
+    event.preventDefault()
+
+    post('/applications', {
+      preserveScroll: true,
+      onSuccess: () => {
+        reset()
+        onClose()
+      }
+    })
+  }
+
   return (
     <div className="fixed inset-0 z-[1000] grid place-items-center p-4" role="dialog" aria-modal="true">
       <div className="absolute inset-0 bg-navy/60" onClick={onClose} aria-hidden="true" />
       <div className="relative bg-white rounded-2xl w-[min(94vw,440px)] max-h-[90vh] overflow-y-auto shadow-2xl p-6">
         <div className="modal-header"><h2>Apply for course</h2></div>
-        <form
-          className="grid gap-3.5 mt-4"
-          onSubmit={(e) => {
-            e.preventDefault()
-            onClose()
-            showToast('Application submitted! Our team will contact you by email.')
-          }}
-        >
+        <form className="grid gap-3.5 mt-4" onSubmit={submit}>
           <p className="text-sm text-muted">Confirm your application.</p>
           <div className="grid gap-1.5">
             <label className="text-sm font-bold text-navy" htmlFor="apply-name">Full Name</label>
-            <input className="input" id="apply-name" type="text" required placeholder="Enter your full name" />
+            <input
+              className="input"
+              id="apply-name"
+              type="text"
+              required
+              placeholder="Enter your full name"
+              value={data.name}
+              onChange={(e) => setData('name', e.target.value)}
+            />
+            {errors.name && <span className="text-xs font-semibold text-red-600">{errors.name}</span>}
           </div>
           <div className="grid gap-1.5">
             <label className="text-sm font-bold text-navy" htmlFor="apply-email">Email</label>
-            <input className="input" id="apply-email" type="email" required placeholder="name@example.com" />
+            <input
+              className="input"
+              id="apply-email"
+              type="email"
+              required
+              placeholder="name@example.com"
+              value={data.email}
+              onChange={(e) => setData('email', e.target.value)}
+            />
+            {errors.email && <span className="text-xs font-semibold text-red-600">{errors.email}</span>}
           </div>
           <div className="grid gap-1.5">
             <label className="text-sm font-bold text-navy" htmlFor="apply-course">Course</label>
             <input className="input" id="apply-course" readOnly value={course} />
           </div>
-          <button type="submit" className="button button-teal button-full">Submit Application</button>
+          <button type="submit" className="button button-teal button-full" disabled={processing}>
+            {processing ? 'Submitting…' : 'Submit Application'}
+          </button>
         </form>
         <button className="modal-close" onClick={onClose} aria-label="Close dialog">×</button>
       </div>
@@ -137,7 +167,7 @@ export function useProgramMeta(P) {
 const FILTER_TAB_BASE =
   'filter-tab whitespace-nowrap border border-teal bg-white text-teal font-bold text-sm px-4 py-2 rounded-full cursor-pointer hover:bg-teal-bg focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-gold focus-visible:outline-offset-2'
 
-export function Catalog({ P }) {
+export function Catalog({ P, programKey = null }) {
   const [filter, setFilter] = useState('All')
   const [query, setQuery] = useState('')
   const [applyFor, setApplyFor] = useState(null)
@@ -214,7 +244,7 @@ export function Catalog({ P }) {
         Listed fee per course record: <strong>Rs. 885 incl. GST</strong>.
       </p>
 
-      {applyFor && <ApplyModal course={applyFor} onClose={() => setApplyFor(null)} />}
+      {applyFor && <ApplyModal course={applyFor} programKey={programKey} onClose={() => setApplyFor(null)} />}
     </section>
   )
 }
@@ -303,10 +333,8 @@ export function QuickHighlights({ peCount, hasAdditional, semLabel }) {
   )
 }
 
-export default function ProgramPage() {
-  const [params] = useSearchParams()
-  const key = (params.get('p') || 'aiml').toLowerCase()
-  const P = PROGRAMS[key]
+export default function ProgramPage({ program, programKey }) {
+  const P = program
   const meta = P ? useProgramMeta(P) : null
 
   if (!P || !meta) {
@@ -314,7 +342,7 @@ export default function ProgramPage() {
       <main>
         <div style={{ padding: '3rem', textAlign: 'center', fontFamily: 'sans-serif' }}>
           Unknown program.&nbsp;
-          <Link style={{ color: '#007D79' }} to="/">Back to streams</Link>
+          <Link style={{ color: '#007D79' }} href="/">Back to streams</Link>
         </div>
       </main>
     )
@@ -323,7 +351,7 @@ export default function ProgramPage() {
   return (
     <main>
       <div className="max-w-[1200px] mx-auto px-6 pt-4 text-sm text-muted" aria-label="Breadcrumb">
-        <Link className="text-teal font-semibold hover:underline" to="/">Home</Link>
+        <Link className="text-teal font-semibold hover:underline" href="/">Home</Link>
         <span> › </span>
         <SectionLink to="/" hash="learning-areas" className="text-teal font-semibold hover:underline">Skillsoft Streams</SectionLink>
         <span> › </span>
@@ -334,7 +362,7 @@ export default function ProgramPage() {
       <QuickHighlights peCount={meta.peCount} hasAdditional={meta.hasAdditional} semLabel={meta.semLabel} />
       <SubjectsGrid P={P} />
       <FeaturedGrid P={P} />
-      <Catalog P={P} />
+      <Catalog P={P} programKey={programKey} />
       <DetailTable P={P} />
       <div style={{ height: '1rem' }}></div>
     </main>

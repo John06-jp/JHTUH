@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, usePage } from '@inertiajs/react'
 import { useUI } from '../context/UIContext'
 import SectionLink from './SectionLink'
-import { SKILLSOFT_CATEGORIES } from '../data/skillsoftCatalog'
 
 const LEARN_ITEMS = [
   { label: 'All Learning Areas', href: '#learning-areas' },
@@ -230,8 +229,6 @@ function HomeHeader() {
   )
 }
 
-const HEADER_CATS = SKILLSOFT_CATEGORIES.filter((c) => c !== 'All')
-
 const navLinkCls =
   'inline-flex items-center whitespace-nowrap rounded-md px-3 py-2 text-sm font-semibold ' +
   'transition-colors hover:bg-soft hover:text-teal ' +
@@ -252,6 +249,8 @@ function BrandLockup() {
 }
 
 function ProgramsDropdown({ current }) {
+  const { categories } = usePage().props
+  const headerCats = (categories || []).filter((c) => c !== 'All')
   const [open, setOpen] = useState(false)
   const ref = useRef(null)
 
@@ -288,17 +287,17 @@ function ProgramsDropdown({ current }) {
       {open && (
         <div className="absolute left-0 top-full z-[70] mt-2 w-72 rounded-xl border border-line bg-white p-3 shadow-xl">
           <p className="px-3 pb-1 pt-1 text-[0.65rem] font-extrabold uppercase tracking-[0.18em] text-muted">Curated programs</p>
-          <Link to="/program" className="flex min-h-[44px] items-center rounded-lg px-3 py-2 text-sm font-semibold text-ink transition-colors hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal">
+          <Link href="/program" className="flex min-h-[44px] items-center rounded-lg px-3 py-2 text-sm font-semibold text-ink transition-colors hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal">
             Skillsoft Programs
           </Link>
-          <Link to="/cse-courses" className="flex min-h-[44px] items-center rounded-lg px-3 py-2 text-sm font-semibold text-ink transition-colors hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal">
+          <Link href="/cse-courses" className="flex min-h-[44px] items-center rounded-lg px-3 py-2 text-sm font-semibold text-ink transition-colors hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal">
             CSE Courses
           </Link>
           <p className="mt-2 px-3 pb-1 pt-1 text-[0.65rem] font-extrabold uppercase tracking-[0.18em] text-muted">Browse by category</p>
-          {HEADER_CATS.map((c) => (
+          {headerCats.map((c) => (
             <Link
               key={c}
-              to={`/skillsoft-catalog?cat=${encodeURIComponent(c)}`}
+              href={`/skillsoft-catalog?cat=${encodeURIComponent(c)}`}
               className="flex min-h-[44px] items-center rounded-lg px-3 py-1.5 text-sm font-medium text-ink transition-colors hover:bg-soft hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
             >
               {c}
@@ -331,7 +330,7 @@ function DrawerLink({ label, to, hash, onClose }) {
     )
   }
   return (
-    <Link to={to} className={cls} onClick={onClose}>
+    <Link href={to} className={cls} onClick={onClose}>
       {inner}
     </Link>
   )
@@ -426,7 +425,8 @@ function MobileDrawer({ open, onClose, openModal }) {
 
 function SubHeader() {
   const { openModal } = useUI()
-  const { pathname } = useLocation()
+  const { url } = usePage()
+  const pathname = url.split('?')[0].split('#')[0]
   const [mobileOpen, setMobileOpen] = useState(false)
 
   useEffect(() => {
@@ -450,11 +450,11 @@ function SubHeader() {
           <BrandLockup />
 
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
-            <Link to="/" className={`${navLinkCls} ${pathname === '/' ? 'text-teal' : ''}`}>
+            <Link href="/" className={`${navLinkCls} ${pathname === '/' ? 'text-teal' : ''}`}>
               Home
             </Link>
             <ProgramsDropdown current={pathname} />
-            <Link to="/skillsoft-catalog" className={`${navLinkCls} ${pathname === '/skillsoft-catalog' ? 'text-teal' : ''}`}>
+            <Link href="/skillsoft-catalog" className={`${navLinkCls} ${pathname === '/skillsoft-catalog' ? 'text-teal' : ''}`}>
               Skillsoft Catalog
             </Link>
             <SectionLink to="/" hash="learning-areas" className={navLinkCls}>
@@ -499,6 +499,7 @@ function SubHeader() {
   )
 }
 export default function Header() {
-  const { pathname } = useLocation()
+  const { url } = usePage()
+  const pathname = url.split('?')[0].split('#')[0]
   return pathname === '/' ? <HomeHeader /> : <SubHeader />
 }

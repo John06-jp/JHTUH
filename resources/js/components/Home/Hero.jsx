@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from '@inertiajs/react'
 
 // Soft atmospheric navy -> transparent dissolve (100% -> 80% -> 50% -> 25% -> 0%)
 const DISSOLVE = 'linear-gradient(to right, #071735 0%, #071735 44%, rgba(7,23,53,0.82) 50%, rgba(7,23,53,0.52) 54%, rgba(7,23,53,0.26) 57%, rgba(7,23,53,0) 60%)'
@@ -74,7 +74,7 @@ export default function Hero() {
               </svg>
             </a>
             <Link
-              to="/cse-courses"
+              href="/cse-courses"
               className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-200 underline-offset-4 transition-colors hover:text-white hover:underline"
             >
               Browse streams

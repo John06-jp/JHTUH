@@ -1,17 +1,36 @@
 # dependencies
-node_modules
+/node_modules
+/vendor
 
 # build output
 dist
+/public/build
+/public/hot
 
 # logs
 *.log
 npm-debug.log*
+yarn-error.log
+
+# laravel
+.env
+.env.backup
+.env.production
+/storage/*.key
+/storage/pail
+.phpactor.json
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+auth.json
 
 # editor
+.idea
+.nova
+.fleet
+.zed
 .vscode/*
 !.vscode/extensions.json
-.idea
 
 # os
 .DS_Store

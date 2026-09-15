@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, usePage } from '@inertiajs/react'
 import { useUI } from '../context/UIContext'
-import { SKILLSOFT_COURSES } from '../data/skillsoftCatalog'
+import { LoginForm, RegisterForm } from './AuthForms'
 
 // Search dialog backed by the real Skillsoft catalog (source: Content-Mapping workbook).
 const POPULAR = ['Python', 'AI', 'Data', 'Cybersecurity', 'DevOps', 'Machine Learning']
@@ -25,17 +25,10 @@ function ModalShell({ children, onClose, width }) {
   )
 }
 
-function Field({ label, htmlFor, children }) {
-  return (
-    <div className="grid gap-1.5">
-      <label className="text-sm font-bold text-navy" htmlFor={htmlFor}>{label}</label>
-      {children}
-    </div>
-  )
-}
-
 function SearchModal({ onClose }) {
   const { showToast } = useUI()
+  const { catalog } = usePage().props
+  const SKILLSOFT_COURSES = catalog || []
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
   const [searched, setSearched] = useState(false)
@@ -105,7 +98,7 @@ function SearchModal({ onClose }) {
         {results.map((course) => (
           <Link
             key={course.slug}
-            to={'/skillsoft-catalog#' + course.slug}
+            href={'/skillsoft-catalog#' + course.slug}
             onClick={onClose}
             className="flex items-center justify-between gap-3 rounded-xl border border-line px-4 py-2.5 text-sm transition-colors hover:border-teal hover:bg-teal-bg"
           >
@@ -122,71 +115,17 @@ function SearchModal({ onClose }) {
 }
 
 function LoginModal({ onClose }) {
-  const { showToast } = useUI()
   return (
     <ModalShell width="w-[min(94vw,440px)]" onClose={onClose}>
-      <h2 className="font-heading font-bold text-navy text-lg">Student Login</h2>
-      <form
-        className="grid gap-3.5 mt-4"
-        onSubmit={(e) => {
-          e.preventDefault()
-          onClose()
-          showToast('Login is a demo — no accounts are stored.')
-        }}
-      >
-        <p className="text-sm text-muted">Access your Skillsoft courses through Area 51's portal.</p>
-        <Field label="Student Roll No. or Email" htmlFor="login-email">
-          <input className="input" id="login-email" type="text" required placeholder="e.g. user@area51.ph" />
-        </Field>
-        <Field label="Password" htmlFor="login-password">
-          <input className="input" id="login-password" type="password" required placeholder="••••••••" />
-        </Field>
-        <div className="flex items-center justify-between text-sm">
-          <label className="inline-flex items-center gap-2 text-muted">
-            <input type="checkbox" className="accent-teal-700" /> Remember me
-          </label>
-          <a href="#" className="font-bold text-teal hover:underline">Forgot password?</a>
-        </div>
-        <button type="submit" className="w-full px-5 py-3 rounded-xl text-sm font-bold bg-teal text-white hover:bg-teal-dark">
-          Login to Student Dashboard
-        </button>
-      </form>
+      <LoginForm onDone={onClose} />
     </ModalShell>
   )
 }
 
 function RegisterModal({ onClose }) {
-  const { showToast } = useUI()
   return (
     <ModalShell width="w-[min(94vw,440px)]" onClose={onClose}>
-      <h2 className="font-heading font-bold text-navy text-lg">Register for Skillsoft Access</h2>
-      <form
-        className="grid gap-3.5 mt-4"
-        onSubmit={(e) => {
-          e.preventDefault()
-          onClose()
-          showToast('Registration submitted successfully!')
-        }}
-      >
-        <p className="text-sm text-muted">Create your learner account to access 22,000+ courses and certifications.</p>
-        <Field label="Full Name" htmlFor="reg-name">
-          <input className="input" id="reg-name" type="text" required placeholder="Enter your full name" />
-        </Field>
-        <Field label="Institutional or Personal Email" htmlFor="reg-email">
-          <input className="input" id="reg-email" type="email" required placeholder="name@example.com" />
-        </Field>
-        <Field label="I am a" htmlFor="reg-role">
-          <select id="reg-role" required className="input bg-white">
-            <option value="student">Student</option>
-            <option value="faculty">Faculty Member</option>
-            <option value="professional">Working Professional</option>
-            <option value="institution">Institutional Administrator</option>
-          </select>
-        </Field>
-        <button type="submit" className="w-full px-5 py-3 rounded-xl text-sm font-bold bg-teal text-white hover:bg-teal-dark">
-          Submit Registration
-        </button>
-      </form>
+      <RegisterForm onDone={onClose} />
     </ModalShell>
   )
 }

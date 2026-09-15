@@ -1,11 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
-import { SKILLSOFT_CATEGORIES, SKILLSOFT_COURSES, SKILLSOFT_DOMAINS } from '../data/skillsoftCatalog'
+import { Link } from '@inertiajs/react'
 
 const hasLink = (url) => url && url !== '#'
 const coursePage = (c) => (hasLink(c.page) ? c.page : null)
-
-const CATEGORIES = SKILLSOFT_CATEGORIES.filter((c) => c !== 'All')
 
 /**
  * "Explore by skill" groups. Each group uses ONLY real Skillsoft domain
@@ -184,25 +181,28 @@ function FilterSheet({ open, onClose, active, onApply, counts }) {
     </div>
   )
 }
-export default function SkillsoftCatalogPage() {
-  const [searchParams] = useSearchParams()
-  const paramCat = searchParams.get('cat')
-  const initialCat = paramCat && CATEGORIES.includes(paramCat) ? paramCat : 'All'
+export default function SkillsoftCatalogPage({
+  tracks: SKILLSOFT_COURSES,
+  domains: SKILLSOFT_DOMAINS,
+  categories: SKILLSOFT_CATEGORIES,
+  cat = 'All'
+}) {
+  const CATEGORIES = SKILLSOFT_CATEGORIES.filter((c) => c !== 'All')
 
   const [query, setQuery] = useState('')
-  const [activeCat, setActiveCat] = useState(initialCat)
+  const [activeCat, setActiveCat] = useState(cat)
   const [sort, setSort] = useState('default')
   const [sheetOpen, setSheetOpen] = useState(false)
 
   useEffect(() => {
-    if (paramCat && CATEGORIES.includes(paramCat)) setActiveCat(paramCat)
-  }, [paramCat])
+    setActiveCat(cat)
+  }, [cat])
 
   const counts = useMemo(() => {
     const map = { All: SKILLSOFT_COURSES.length }
     for (const c of CATEGORIES) map[c] = SKILLSOFT_COURSES.filter((x) => x.category === c).length
     return map
-  }, [])
+  }, [SKILLSOFT_COURSES, SKILLSOFT_CATEGORIES])
 
   const visible = useMemo(() => {
     const q = query.trim().toLowerCase()
@@ -215,7 +215,7 @@ export default function SkillsoftCatalogPage() {
     })
     if (sort === 'az') list = [...list].sort((a, b) => a.title.localeCompare(b.title))
     return list
-  }, [query, activeCat, sort])
+  }, [query, activeCat, sort, SKILLSOFT_COURSES])
 
   const setCat = (c) => setActiveCat(c)
 
@@ -223,7 +223,7 @@ export default function SkillsoftCatalogPage() {
     <main className="bg-soft text-ink">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 pb-12 sm:pb-14">
         <div className="mb-6 flex flex-wrap items-center gap-2 text-sm text-muted">
-          <Link className="font-semibold text-teal hover:underline" to="/">Home</Link>
+          <Link className="font-semibold text-teal hover:underline" href="/">Home</Link>
           <span aria-hidden="true">›</span>
           <span>Skillsoft Catalog</span>
         </div>
@@ -349,7 +349,7 @@ export default function SkillsoftCatalogPage() {
                   {group.chips.map((chip) => (
                     <li key={chip}>
                       <Link
-                        to={`/skillsoft-catalog?cat=${encodeURIComponent(group.cat)}`}
+                        href={`/skillsoft-catalog?cat=${encodeURIComponent(group.cat)}`}
                         className="inline-flex min-h-[36px] items-center rounded-full border border-line bg-white px-3 py-1.5 text-xs font-semibold text-navy transition-colors hover:border-teal/50 hover:bg-teal-bg hover:text-teal focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal"
                         title={chip}
                       >
