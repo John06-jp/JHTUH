@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from '@inertiajs/react'
 import CourseEnrollmentModal from '../components/CourseEnrollmentModal'
 
 export default function CourseDetails({ course }) {
@@ -8,14 +7,6 @@ export default function CourseDetails({ course }) {
   return (
     <main className="bg-soft text-ink">
       <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
-        <nav className="mb-8 text-sm text-muted" aria-label="Breadcrumb">
-          <Link href="/" className="font-semibold text-teal hover:underline">Home</Link>
-          <span className="mx-2">›</span>
-          <Link href="/skillsoft-catalog" className="font-semibold text-teal hover:underline">Courses</Link>
-          <span className="mx-2">›</span>
-          <span>{course.title}</span>
-        </nav>
-
         <article className="overflow-hidden rounded-2xl border border-line bg-white shadow-sm">
           <div className="aspect-[16/6] overflow-hidden bg-soft">
             <img src={course.image || '/course-images/IMG1.jpg'} alt={`${course.title} course illustration`} className="h-full w-full object-cover" />

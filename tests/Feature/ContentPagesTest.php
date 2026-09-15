@@ -3,9 +3,13 @@
 namespace Tests\Feature;
 
 use App\Models\Application;
+use App\Models\AspireJourney;
+use App\Models\SkillsoftTrack;
 use App\Models\User;
 use Database\Seeders\ContentSeeder;
+use Database\Seeders\RequestedCatalogSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 use Inertia\Testing\AssertableInertia as Assert;
 use Tests\TestCase;
 
@@ -167,5 +171,55 @@ class ContentPagesTest extends TestCase
 
         $this->assertSame('faculty', $user->role);
         $this->assertAuthenticatedAs($user);
+    }
+
+    public function test_core_course_details_page_renders_the_track(): void
+    {
+        $this->seed(RequestedCatalogSeeder::class);
+
+        $track = SkillsoftTrack::query()
+            ->where('catalog_group', 'core')
+            ->with('outcomes')
+            ->firstOrFail();
+
+        $this->get("/courses/core/{$track->slug}")
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('pages/CourseDetails')
+                ->where('course.type', 'core')
+                ->where('course.slug', $track->slug)
+                ->where('course.title', $track->title)
+                ->has('course.outcomes', $track->outcomes->count())
+            );
+    }
+
+    public function test_aspire_course_details_page_renders_the_journey(): void
+    {
+        $this->seed(RequestedCatalogSeeder::class);
+
+        $journey = AspireJourney::query()
+            ->where('journey_group', 'aspire')
+            ->with('outcomes')
+            ->firstOrFail();
+
+        $slug = Str::slug($journey->title);
+
+        $this->get("/courses/aspire/{$slug}")
+            ->assertOk()
+            ->assertInertia(fn (Assert $page) => $page
+                ->component('pages/CourseDetails')
+                ->where('course.type', 'aspire')
+                ->where('course.slug', $slug)
+                ->where('course.title', $journey->title)
+                ->has('course.outcomes', $journey->outcomes->count())
+            );
+    }
+
+    public function test_course_details_page_404s_for_unknown_type_or_slug(): void
+    {
+        $this->seed(RequestedCatalogSeeder::class);
+
+        $this->get('/courses/bogus/anything')->assertNotFound();
+        $this->get('/courses/core/not-a-real-course')->assertNotFound();
     }
 }
