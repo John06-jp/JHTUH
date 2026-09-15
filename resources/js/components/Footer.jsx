@@ -71,14 +71,11 @@ function HomeFooter() {
           {/* Area 51 brand — always visible */}
           <div>
             <img
-              src="/footterlogo.png"
-              alt="Area 51"
+              src="/partnerslogo.jpg"
+              alt="Area 51 partners"
               className="w-auto max-w-[220px]"
             />
-            <p className="mt-4 max-w-[18rem] text-base leading-relaxed text-slate-200">
-              Davao's leading digital platforms and solutions provider.
-            </p>
-
+          
             <div className="mt-6 flex gap-3" id="social-links">
               <a href="#" aria-label="Facebook" className="grid h-10 w-10 place-items-center rounded-full bg-white text-[#0a1d2d] text-sm font-bold shadow-sm transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7fe7db]">f</a>
               <a href="#" aria-label="LinkedIn" className="grid h-10 w-10 place-items-center rounded-full bg-white text-[#0a1d2d] text-sm font-bold shadow-sm transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#7fe7db]">in</a>
