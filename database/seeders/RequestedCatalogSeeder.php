@@ -45,7 +45,7 @@ class RequestedCatalogSeeder extends Seeder
         foreach ($sections as $section) {
             $duration = $this->field($section['body'], 'Duration');
             $track = $this->findTrack($section['title']) ?? new SkillsoftTrack(['slug' => $this->uniqueTrackSlug($section['title'])]);
-            $image = $track->image ?: '/course-images/IMG'.((($section['number'] - 1) % 24) + 1).'.jpg';
+            $image = '/course-images/IMG'.$section['number'].'.jpg';
             $track->fill(
                 [
                     'title' => $section['title'],
@@ -75,6 +75,7 @@ class RequestedCatalogSeeder extends Seeder
                 'category' => $this->journeyCategory($section['number']),
                 'journey_group' => 'aspire',
                 'description' => $this->field($section['body'], 'Course description'),
+                'image' => '/course-images/journey-IMG'.$section['number'].'.jpg',
                 'sort' => $section['number'] - 1,
             ]);
             $journey->save();
