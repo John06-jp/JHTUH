@@ -90,7 +90,6 @@ function MobileNav({ open, openModal }) {
     { label: 'Learn', href: '#learning-areas' },
     { label: 'Certifications', href: '#certifications' },
     { label: 'For Institutions', href: '#audience' },
-    { label: 'Partners', href: '#impact' },
     { label: 'About', href: '#about' },
     { label: 'Support', href: '#footer' }
   ]
@@ -160,7 +159,6 @@ function HomeHeader() {
             <NavDropdown label="Learn" items={LEARN_ITEMS} />
             <TopLink href="#certifications">Certifications</TopLink>
             <TopLink href="#audience">For Institutions</TopLink>
-            <TopLink href="#impact">Partners</TopLink>
             <TopLink href="#about">About </TopLink>
             <NavDropdown label="Support" items={SUPPORT_ITEMS} />
           </nav>
